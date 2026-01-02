@@ -44,7 +44,7 @@ const profile = {
   locationLine: "Daegu, South Korea",
   links: {
     github: "https://github.com/NishthaLath",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/nishtha-lath-335206276/",
     email: "",
   },
   about: [
@@ -768,41 +768,22 @@ export default function Home() {
             />
 
             <Card>
-              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <div className="text-base font-semibold text-foreground">
-                    Quick links
-                  </div>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
-                    For now, connect via GitHub. (You can add email and LinkedIn in this page when ready.)
-                  </p>
-                </div>
+              <div className="flex flex-wrap gap-3">
+                {githubEnabled ? (
+                  <LinkButton
+                    label="GitHub"
+                    href={profile.links.github}
+                    variant="primary"
+                  />
+                ) : null}
 
-                <div className="flex flex-wrap gap-3">
-                  {emailEnabled ? (
-                    <LinkButton
-                      label="Email"
-                      href={`mailto:${profile.links.email}`}
-                      variant="primary"
-                    />
-                  ) : null}
-
-                  {githubEnabled ? (
-                    <LinkButton
-                      label="GitHub"
-                      href={profile.links.github}
-                      variant={emailEnabled ? "secondary" : "primary"}
-                    />
-                  ) : null}
-
-                  {linkedinEnabled ? (
-                    <LinkButton
-                      label="LinkedIn"
-                      href={profile.links.linkedin}
-                      variant="secondary"
-                    />
-                  ) : null}
-                </div>
+                {linkedinEnabled ? (
+                  <LinkButton
+                    label="LinkedIn"
+                    href={profile.links.linkedin}
+                    variant="secondary"
+                  />
+                ) : null}
               </div>
             </Card>
 
