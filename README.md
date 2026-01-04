@@ -53,7 +53,9 @@ To enable GitHub Pages for this repository:
 1. Go to repository **Settings** → **Pages**
 2. Under "Build and deployment":
    - Source: Select **GitHub Actions**
-3. The site will be available at `https://nishthalath.github.io/Portfolio/`
+3. The site will be available at `https://<your-username>.github.io/Portfolio/`
+   - Replace `<your-username>` with your GitHub username
+   - The URL format is: `https://[username].github.io/[repository-name]/`
 
 ### Configuration
 
