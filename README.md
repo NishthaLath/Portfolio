@@ -29,4 +29,38 @@ npm run build
 npm run start
 ```
 
+## GitHub Pages Deployment
+
+This portfolio is configured to deploy automatically to GitHub Pages. Here's how it works:
+
+### Automatic Deployment
+
+1. Every push to the `main` branch triggers the deployment workflow
+2. GitHub Actions builds the Next.js site as static files
+3. The built files are automatically deployed to GitHub Pages
+
+### Manual Deployment
+
+You can also trigger deployment manually:
+1. Go to the Actions tab in your GitHub repository
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+
+### Setup Requirements
+
+To enable GitHub Pages for this repository:
+
+1. Go to repository **Settings** → **Pages**
+2. Under "Build and deployment":
+   - Source: Select **GitHub Actions**
+3. The site will be available at `https://<your-username>.github.io/Portfolio/`
+   - Replace `<your-username>` with your GitHub username
+   - The URL format is: `https://[username].github.io/[repository-name]/`
+
+### Configuration
+
+The deployment configuration is in:
+- `.github/workflows/deploy.yml` - GitHub Actions workflow
+- `next.config.ts` - Next.js export settings with basePath for GitHub Pages
+
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
