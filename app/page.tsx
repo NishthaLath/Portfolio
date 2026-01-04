@@ -20,6 +20,7 @@ type ProjectItem = {
   whatBuilt: string[];
   stack: string[];
   outcomes?: string[];
+  repoLinks?: { label: string; href: string }[];
 };
 
 type ResearchItem = {
@@ -28,6 +29,7 @@ type ResearchItem = {
   award: string;
   summaryBullets: string[];
   stack: string[];
+  repoLinks?: { label: string; href: string }[];
 };
 
 const profile = {
@@ -178,6 +180,10 @@ const projects: ProjectItem[] = [
       "Production-deployed chatbot for departmental information access.",
       "Stable and maintainable AI service under real deployment conditions.",
     ],
+    repoLinks: [
+      { label: "Frontend", href: "https://github.com/NishthaLath/InflowChat_Chatbot_Frontend" },
+      { label: "Organization", href: "https://github.com/InfoFlow-ChatBot-RikkeiSoft-Corp" },
+    ],
   },
   {
     title: "Accessible Public Transportation Kiosk (Visoned)",
@@ -191,6 +197,9 @@ const projects: ProjectItem[] = [
     stack: ["Node.js", "React", "Google Cloud STT/TTS/Maps"],
     outcomes: [
       "Functional prototype with accessibility-focused interaction design.",
+    ],
+    repoLinks: [
+      { label: "Backend", href: "https://github.com/NishthaLath/VISIONED-KNU-Kiosk-Backend" },
     ],
   },
   {
@@ -214,6 +223,10 @@ const projects: ProjectItem[] = [
       "Evaluated performance on real datasets.",
     ],
     stack: ["Python", "OpenCV", "YOLO", "DeepSORT", "ST-GCN", "Torchreid"],
+    repoLinks: [
+      { label: "Organization", href: "https://github.com/Multi-CCTV-Human-Behavior-Analysis" },
+      { label: "HumanRecognition", href: "https://github.com/Multi-CCTV-Human-Behavior-Analysis/HumanRecognition" },
+    ],
   },
 ];
 
@@ -228,6 +241,9 @@ const research: ResearchItem[] = [
       "Observed stronger handling of ambiguity and multi-intent inputs with LLaMA.",
     ],
     stack: ["LLaMA", "RASA", "Python", "NLP evaluation"],
+    repoLinks: [
+      { label: "Paper Repo", href: "https://github.com/NishthaLath/UCWIT-2024-ResearchPaper" },
+    ],
   },
 ];
 
@@ -640,6 +656,13 @@ export default function Home() {
                           </ul>
                         </>
                       ) : null}
+                      {p.repoLinks && p.repoLinks.length > 0 ? (
+                        <div className="mt-6 flex flex-wrap gap-3">
+                          {p.repoLinks.map((r) => (
+                            <LinkButton key={r.href} label={r.label} href={r.href} variant="secondary" />
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </Card>
@@ -685,6 +708,13 @@ export default function Home() {
                       <Tag key={s}>{s}</Tag>
                     ))}
                   </div>
+                  {r.repoLinks && r.repoLinks.length > 0 ? (
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      {r.repoLinks.map((rl) => (
+                        <LinkButton key={rl.href} label={rl.label} href={rl.href} variant="secondary" />
+                      ))}
+                    </div>
+                  ) : null}
                 </Card>
               ))}
             </div>
