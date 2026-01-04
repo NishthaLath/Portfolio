@@ -335,11 +335,25 @@ function LinkButton({
 }) {
   const base =
     "inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition-all duration-300 ease-out transform";
+  
+  const primaryStyles = [
+    "bg-gradient-to-r from-accent to-accent-2 text-white",
+    "shadow-lg shadow-accent/25",
+    "hover:shadow-xl hover:shadow-accent/40 hover:scale-105 hover:-translate-y-0.5",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "active:scale-100"
+  ].join(" ");
+  
+  const secondaryStyles = [
+    "border-2 border-border bg-surface/60 text-foreground shadow-md backdrop-blur-sm",
+    "hover:bg-surface-2 hover:border-accent/50 hover:shadow-lg hover:scale-105 hover:-translate-y-0.5",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "active:scale-100"
+  ].join(" ");
+  
   const variants = {
-    primary:
-      "bg-gradient-to-r from-accent to-accent-2 text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/40 hover:scale-105 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-100",
-    secondary:
-      "border-2 border-border bg-surface/60 text-foreground shadow-md hover:bg-surface-2 hover:border-accent/50 hover:shadow-lg hover:scale-105 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-100 backdrop-blur-sm",
+    primary: primaryStyles,
+    secondary: secondaryStyles,
   } as const;
 
   return (
