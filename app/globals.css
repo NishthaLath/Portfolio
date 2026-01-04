@@ -99,3 +99,8 @@ html {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* Ensure hand cursor on interactive elements */
+a, a:link, a:visited, button, [role="button"], input, textarea, select {
+  cursor: pointer;
+}

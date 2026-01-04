@@ -1,4 +1,7 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+"use client";
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from "react";
 type LinkItem = {
   label: string;
   href: string;
@@ -38,11 +41,11 @@ const profile = {
   nameNative: "니스타",
   headline: "AI systems · LLM applications · full-stack engineering",
   subheadline:
-    "Computer Science & Engineering (KNU, 2022–2026). Research-backed builds with production-aware deployments.",
+    "Computer Science & Engineering (KNU, 2022–2026). Research-driven development with production-grade delivery.",
   quickFacts: [
     "Kyungpook National University (KNU)",
     "TOPIK Level 5",
-    "AI + Web Systems",
+    "AI & web systems",
   ],
   locationLine: "Daegu, South Korea",
   links: {
@@ -51,39 +54,61 @@ const profile = {
     email: "",
   },
   about: [
-    "I’m a Computer Science & Engineering undergraduate at Kyungpook National University (2022–2026). My work sits at the intersection of LLM applications (RAG, conversational systems) and software engineering—from FastAPI backends to React frontends.",
-    "I focus on systems that stay usable in real contexts: ambiguous language, messy data sources, and real users—especially in accessibility-focused kiosks and assistants.",
+    "I am a Computer Science & Engineering undergraduate at Kyungpook National University (2022–2026). My work sits at the intersection of LLM applications—such as RAG and conversational systems—and software engineering, spanning FastAPI backends and React frontends.",
+    "I focus on building systems that remain reliable in real-world conditions, including ambiguous language, noisy data, and real users, with particular emphasis on accessibility-focused kiosks and intelligent assistants.",
   ],
   academics: {
     school:
-      "Kyungpook National University (KNU), South Korea — B.S. Computer Science & Engineering (2022–2026)",
+      "Kyungpook National University (KNU), South Korea — B.S. in Computer Science & Engineering (2022–2026)",
     gpa: "GPA: 3.55 / 4.3 · Current semester GPA: 3.77 / 4.3",
     coursework: [
-      "AI & Machine Learning",
+      "Artificial Intelligence & Machine Learning",
       "Operating Systems",
       "Network Programming",
       "Database Systems",
       "Software Engineering",
-      "Cybersecurity fundamentals",
+      "Cybersecurity Fundamentals",
     ],
   },
   languages: [
-    "English — Fluent (Advanced)",
+    "English — Fluent",
     "Hindi — Native",
     "Korean — Advanced (TOPIK Level 5)",
   ],
+};
+
+const koProfile = {
+  name: "니스타",
+  nameNative: "Lath Nishtha",
+  headline: "AI 시스템 · LLM 응용 · 풀스택 엔지니어링",
+  subheadline:
+    "경북대학교 컴퓨터학부 심화컴퓨터공학전공 학부생(2022–2026). 연구 기반 개발과 실무 배포를 연결하는 작업을 수행합니다.",
+  quickFacts: ["경북대학교 (KNU)", "TOPIK 5급", "AI · 웹 시스템"],
+  locationLine: "대구, 대한민국",
+  links: profile.links,
+  about: [
+    "저는 경북대학교 컴퓨터학부 심화컴퓨터공학전공에 재학 중인 학부생(2022–2026)으로, RAG 및 대화형 시스템과 같은 LLM 응용과 소프트웨어 엔지니어링을 결합한 개발을 수행하고 있습니다.",
+    "모호한 언어 입력과 잡음이 섞인 데이터, 실제 사용자가 존재하는 환경에서도 안정적으로 동작하는 시스템을 지향하며, 특히 접근성 중심의 키오스크와 지능형 보조 시스템에 관심이 있습니다.",
+  ],
+  academics: {
+    school:
+      "경북대학교 (KNU), 대한민국 — 컴퓨터학부 심화컴퓨터공학전공 학사 (2022–2026)",
+    gpa: "평점: 3.55 / 4.3 · 현재 학기 평점: 3.77 / 4.3",
+    coursework: profile.academics.coursework,
+  },
+  languages: ["영어 — 상급", "힌디어 — 원어민", "한국어 — 상급 (TOPIK 5급)"],
 };
 
 const skills = [
   {
     title: "AI / LLMs",
     items: [
-      "LLaMA, GPT",
-      "RAG (Retrieval-Augmented Generation)",
-      "Prompt engineering",
+      "LLaMA, GPT models",
+      "Retrieval-Augmented Generation (RAG)",
+      "Prompt design and evaluation",
       "Fine-tuning (Unsloth)",
-      "NLP & conversational AI",
-      "Dataset creation & preprocessing",
+      "Conversational AI and NLP",
+      "Dataset creation and preprocessing",
     ],
   },
   {
@@ -94,14 +119,14 @@ const skills = [
       "LangChain, FAISS",
       "Spring Boot, JPA/Hibernate",
       "Vector databases",
-      "CORS, reverse proxy, port binding",
+      "CORS, reverse proxies, port binding",
     ],
   },
   {
     title: "Frontend",
     items: [
-      "React.js (TypeScript)",
-      "HTML, CSS (Tailwind)",
+      "React (TypeScript)",
+      "HTML, CSS, Tailwind",
       "Role-based UI patterns",
       "Component architecture",
     ],
@@ -145,9 +170,9 @@ const experience: ExperienceItem[] = [
     org: "RikkeiSoft Corporation",
     dates: "Dec 2024 – Jan 2025",
     bullets: [
-      "Built the frontend architecture in React (TypeScript) and Tailwind CSS for an internal AI chatbot platform.",
-      "Designed role-based dashboards (user vs admin) and implemented prompt customization, file/link management, and admin controls.",
-      "Led planning and coordination using Trello, WBS, and Gantt-style scheduling.",
+      "Designed and implemented the frontend architecture using React (TypeScript) and Tailwind CSS for an internal AI chatbot platform.",
+      "Built role-based dashboards (user vs admin) supporting prompt customization, file and link management, and administrative controls.",
+      "Led project planning and coordination using Trello, WBS, and Gantt-style schedules.",
     ],
     stack: ["React", "TypeScript", "Tailwind CSS", "GitHub"],
   },
@@ -155,11 +180,37 @@ const experience: ExperienceItem[] = [
     title: "Undergraduate Lab Intern",
     org: "Intelligent Software Systems Lab",
     dates: "Oct 2025 – Dec 2025",
-    note: "Dates match resume; confirm if extended.",
+    note: "Dates align with the resume; update if extended.",
     bullets: [
-      "Built a RAG-based disaster response assistant integrating legal manuals, population datasets, and geo-spatial risk data.",
-      "Implemented FAISS retrieval, LangChain pipelines, and an optimized FastAPI backend for heterogeneous inputs.",
-      "Reduced hallucination risk through retrieval filtering and prompt tuning.",
+      "Developed a RAG-based disaster response assistant integrating legal manuals, population datasets, and geospatial risk data.",
+      "Implemented FAISS-based retrieval, LangChain pipelines, and an optimized FastAPI backend to handle heterogeneous inputs.",
+      "Reduced hallucination risk through retrieval filtering and targeted prompt tuning.",
+    ],
+    stack: ["FastAPI", "LangChain", "FAISS", "LLMs"],
+  },
+];
+
+const koExperience: ExperienceItem[] = [
+  {
+    title: "프론트엔드 개발 인턴 (팀 리더)",
+    org: "RikkeiSoft Corporation",
+    dates: "Dec 2024 – Jan 2025",
+    bullets: [
+      "내부 AI 챗봇 플랫폼을 위해 React(TypeScript)와 Tailwind CSS 기반의 프런트엔드 아키텍처를 설계·구현했습니다.",
+      "사용자/관리자 역할 기반 대시보드를 구축하고 프롬프트 커스터마이징, 파일·링크 관리, 관리자 제어 기능을 구현했습니다.",
+      "Trello, WBS, 간트 일정 관리를 활용해 프로젝트 기획과 조정을 리드했습니다.",
+    ],
+    stack: ["React", "TypeScript", "Tailwind CSS", "GitHub"],
+  },
+  {
+    title: "학부 연구실 인턴",
+    org: "Intelligent Software Systems Lab",
+    dates: "Oct 2025 – Dec 2025",
+    note: "이력서와 동일한 기간입니다. 연장될 경우 업데이트가 필요합니다.",
+    bullets: [
+      "법령 매뉴얼, 인구 데이터셋, 지리공간 위험 데이터를 통합한 RAG 기반 재난 대응 어시스턴트를 개발했습니다.",
+      "FAISS 기반 검색, LangChain 파이프라인, 이기종 입력을 처리하는 최적화된 FastAPI 백엔드를 구현했습니다.",
+      "검색 필터링과 정밀한 프롬프트 튜닝을 통해 환각(hallucination) 발생 위험을 낮췄습니다.",
     ],
     stack: ["FastAPI", "LangChain", "FAISS", "LLMs"],
   },
@@ -168,18 +219,18 @@ const experience: ExperienceItem[] = [
 const projects: ProjectItem[] = [
   {
     title: "SheBots",
-    subtitle: "AI-integrated RAG chatbot for a department website",
+    subtitle: "AI-enabled RAG chatbot for a department website",
     role: "Lead backend & AI developer",
     whatBuilt: [
-      "Designed a hybrid RAG architecture using LangChain + FAISS.",
-      "Integrated GPT-4.1 with retrieval and served it via a FastAPI backend.",
-      "Deployed on AWS EC2 using Docker and NGINX.",
-      "Handled deployment constraints including disk expansion, reverse proxy setup, CORS, and port binding.",
+      "Designed a hybrid RAG architecture using LangChain and FAISS.",
+      "Integrated GPT-4.1 with retrieval and served responses through a FastAPI backend.",
+      "Deployed the system on AWS EC2 using Docker and NGINX.",
+      "Addressed deployment constraints including disk expansion, reverse proxy configuration, CORS, and port binding.",
     ],
     stack: ["FastAPI", "LangChain", "FAISS", "AWS EC2", "Docker", "NGINX"],
     outcomes: [
-      "Production-deployed chatbot for departmental information access.",
-      "Stable and maintainable AI service under real deployment conditions.",
+      "Production chatbot providing departmental information.",
+      "Stable and maintainable AI service under real-world deployment conditions.",
     ],
     repoLinks: [
       { label: "Frontend", href: "https://github.com/NishthaLath/InflowChat_Chatbot_Frontend" },
@@ -191,13 +242,13 @@ const projects: ProjectItem[] = [
     subtitle: "Voice-driven kiosk prototype for accessible routing",
     role: "Backend lead & AI integration engineer",
     whatBuilt: [
-      "Built a voice-driven kiosk backend using Node.js.",
-      "Integrated Google Cloud APIs (STT, TTS, Maps).",
+      "Developed a voice-driven kiosk backend using Node.js.",
+      "Integrated Google Cloud APIs for Speech-to-Text, Text-to-Speech, and Maps.",
       "Implemented route optimization logic and backend–frontend integration.",
     ],
     stack: ["Node.js", "React", "Google Cloud STT/TTS/Maps"],
     outcomes: [
-      "Functional prototype with accessibility-focused interaction design.",
+      "Functional prototype featuring accessibility-first interaction design.",
     ],
     repoLinks: [
       { label: "Backend", href: "https://github.com/NishthaLath/VISIONED-KNU-Kiosk-Backend" },
@@ -205,11 +256,11 @@ const projects: ProjectItem[] = [
   },
   {
     title: "AI-Driven Voice Recognition Cafe Kiosk",
-    subtitle: "LLM tuning for robust voice ordering",
+    subtitle: "LLM tuning for robust voice-based ordering",
     role: "Frontend + AI lead",
     whatBuilt: [
-      "Designed prompts for complex, ambiguous, multi-item orders.",
-      "Fine-tuned LLaMA models using Unsloth and deployed via Hugging Face Hub.",
+      "Designed prompts to handle complex and ambiguous multi-item orders.",
+      "Fine-tuned LLaMA models using Unsloth and deployed them to Hugging Face Hub.",
     ],
     stack: ["Python", "PyTorch", "Transformers", "LLaMA", "Unsloth"],
   },
@@ -218,10 +269,10 @@ const projects: ProjectItem[] = [
     subtitle: "Multi-person tracking, action recognition, and re-identification",
     role: "Core AI pipeline developer",
     whatBuilt: [
-      "Built tracking with YOLO + DeepSORT.",
-      "Implemented action recognition using ST-GCN.",
-      "Added cross-camera re-identification with FaceNet and OSNet (Torchreid).",
-      "Evaluated performance on real datasets.",
+      "Implemented multi-person tracking using YOLO and DeepSORT.",
+      "Applied action recognition with ST-GCN.",
+      "Added cross-camera re-identification using FaceNet and OSNet (Torchreid).",
+      "Evaluated system performance on real-world datasets.",
     ],
     stack: ["Python", "OpenCV", "YOLO", "DeepSORT", "ST-GCN", "Torchreid"],
     repoLinks: [
@@ -231,14 +282,78 @@ const projects: ProjectItem[] = [
   },
 ];
 
+const koProjects: ProjectItem[] = [
+  {
+    title: "SheBots",
+    subtitle: "학과 웹사이트용 AI 기반 RAG 챗봇",
+    role: "백엔드 및 AI 리드 개발자",
+    whatBuilt: [
+      "LangChain과 FAISS를 활용한 하이브리드 RAG 아키텍처를 설계했습니다.",
+      "GPT-4.1을 검색 파이프라인과 결합하여 FastAPI 백엔드로 서비스했습니다.",
+      "AWS EC2 환경에 Docker와 NGINX를 사용해 배포했습니다.",
+      "디스크 확장, 리버스 프록시 설정, CORS, 포트 바인딩 등 배포 제약을 해결했습니다.",
+    ],
+    stack: ["FastAPI", "LangChain", "FAISS", "AWS EC2", "Docker", "NGINX"],
+    outcomes: [
+      "학과 정보 제공을 위한 실서비스 챗봇을 운영했습니다.",
+      "실제 배포 환경에서도 안정적으로 유지 가능한 AI 서비스를 구축했습니다.",
+    ],
+    repoLinks: [
+      { label: "프론트엔드", href: "https://github.com/NishthaLath/InflowChat_Chatbot_Frontend" },
+      { label: "조직용", href: "https://github.com/InfoFlow-ChatBot-RikkeiSoft-Corp" },
+    ],
+  },
+  {
+    title: "Accessible Public Transportation Kiosk (Visoned)",
+    subtitle: "접근성 중심 음성 기반 경로 안내 키오스크 프로토타입",
+    role: "백엔드 리드 및 AI 통합 엔지니어",
+    whatBuilt: [
+      "Node.js 기반의 음성 인터페이스 키오스크 백엔드를 구축했습니다.",
+      "Google Cloud(STT, TTS, Maps) 서비스를 통합했습니다.",
+      "경로 최적화 로직과 프런트엔드 연동을 구현했습니다.",
+    ],
+    stack: ["Node.js", "React", "Google Cloud STT/TTS/Maps"],
+    outcomes: ["접근성 우선 상호작용을 갖춘 기능적 프로토타입을 구현했습니다."],
+    repoLinks: [
+      { label: "백엔드", href: "https://github.com/NishthaLath/VISIONED-KNU-Kiosk-Backend" },
+    ],
+  },
+  {
+    title: "AI-Driven Voice Recognition Cafe Kiosk",
+    subtitle: "강건한 음성 주문 처리를 위한 LLM 튜닝",
+    role: "프론트엔드 + AI 리드",
+    whatBuilt: [
+      "복잡하고 모호한 다품목 주문을 처리할 수 있도록 프롬프트를 설계했습니다.",
+      "LLaMA 모델을 Unsloth로 파인튜닝한 후 Hugging Face Hub에 배포했습니다.",
+    ],
+    stack: ["Python", "PyTorch", "Transformers", "LLaMA", "Unsloth"],
+  },
+  {
+    title: "AI-Based Multi-CCTV Person Detection & Behavior Analysis",
+    subtitle: "다중 객체 추적, 행동 인식, 재식별",
+    role: "핵심 AI 파이프라인 개발자",
+    whatBuilt: [
+      "YOLO와 DeepSORT를 활용해 다중 인물 추적을 구현했습니다.",
+      "ST-GCN 기반 행동 인식 모델을 적용했습니다.",
+      "FaceNet과 OSNet(Torchreid)을 활용해 교차 카메라 재식별을 추가했습니다.",
+      "실제 데이터셋을 사용해 성능을 검증했습니다.",
+    ],
+    stack: ["Python", "OpenCV", "YOLO", "DeepSORT", "ST-GCN", "Torchreid"],
+    repoLinks: [
+      { label: "조직용", href: "https://github.com/Multi-CCTV-Human-Behavior-Analysis" },
+      { label: "HumanRecognition", href: "https://github.com/Multi-CCTV-Human-Behavior-Analysis/HumanRecognition" },
+    ],
+  },
+];
+
 const research: ResearchItem[] = [
   {
-    title: "Evaluating LLaMA Model for Enhanced Conversational AI in Voice Recognition Kiosks",
+    title: "Evaluating the LLaMA Model for Enhanced Conversational AI in Voice Recognition Kiosks",
     venue: "UCWIT 2024 (KIISE-hosted)",
     award: "Excellent Paper Award (Top 4 / 47 teams)",
     summaryBullets: [
-      "Compared rule-based conversational systems (RASA) with LLaMA under realistic kiosk-style dialogue scenarios.",
-      "Built controlled test conversations and a task-based evaluation methodology.",
+      "Compared rule-based conversational systems (RASA) with LLaMA in realistic kiosk-style dialogue scenarios.",
+      "Designed controlled test conversations and a task-based evaluation methodology.",
       "Observed stronger handling of ambiguity and multi-intent inputs with LLaMA.",
     ],
     stack: ["LLaMA", "RASA", "Python", "NLP evaluation"],
@@ -248,22 +363,117 @@ const research: ResearchItem[] = [
   },
 ];
 
+const koResearch: ResearchItem[] = [
+  {
+    title: "음성 인식 키오스크 환경에서 대화형 AI 성능 향상을 위한 LLaMA 모델 평가",
+    venue: "UCWIT 2024 (KIISE 주최)",
+    award: "우수 논문상 (47팀 중 Top 4)",
+    summaryBullets: [
+      "현실적인 키오스크 대화 시나리오에서 규칙 기반 대화 시스템(RASA)과 LLaMA를 비교 평가했습니다.",
+      "제어된 테스트 대화와 과제 기반 평가 방법론을 설계했습니다.",
+      "LLaMA가 모호한 입력과 다중 의도 처리에서 더 우수한 성능을 보임을 확인했습니다.",
+    ],
+    stack: ["LLaMA", "RASA", "Python", "NLP 평가"],
+    repoLinks: [
+      { label: "논문 레포지토리", href: "https://github.com/NishthaLath/UCWIT-2024-ResearchPaper" },
+    ],
+  },
+];
+
 const leadership = [
   {
     title: "International Student Representative (CS Department)",
-    detail: "Student support and departmental coordination.",
+    detail: "Student support and coordination between students and the department.",
   },
   {
     title: "ISO Member",
-    detail: "Event organization and international student support.",
+    detail: "Event organization and support for international students.",
   },
   {
     title: "KERT Cybersecurity Club Member",
-    detail: "CTFs, web security, and cryptography fundamentals.",
+    detail: "Participation in CTFs and foundational work in web security and cryptography.",
   },
   {
     title: "Dance & Debate Competitions",
-    detail: "Multiple awards; bilingual debating (Korean & English).",
+    detail: "Multiple awards; bilingual debating in Korean and English.",
+  },
+];
+
+const koLeadership = [
+  {
+    title: "국제 학생 대표 (컴퓨터공학과)",
+    detail: "국제 학생 지원 및 학과와의 소통을 담당했습니다.",
+  },
+  {
+    title: "ISO 회원",
+    detail: "행사 기획 및 국제 학생 지원 활동에 참여했습니다.",
+  },
+  {
+    title: "KERT 사이버보안 동아리 회원",
+    detail: "CTF 참여와 웹 보안, 암호학 기초 학습을 진행했습니다.",
+  },
+  {
+    title: "댄스 및 토론 대회",
+    detail: "다수 수상 경력 보유 · 한국어·영어 이중 언어 토론.",
+  },
+];
+
+const koSkills = [
+  {
+    title: "AI / LLM",
+    items: [
+      "LLaMA, GPT 모델",
+      "RAG (검색 증강 생성)",
+      "프롬프트 설계 및 평가",
+      "파인튜닝 (Unsloth)",
+      "대화형 AI 및 NLP",
+      "데이터셋 생성 및 전처리",
+    ],
+  },
+  {
+    title: "백엔드 & API",
+    items: [
+      "FastAPI",
+      "RESTful API 설계",
+      "LangChain, FAISS",
+      "Spring Boot, JPA/Hibernate",
+      "벡터 데이터베이스",
+      "CORS, 리버스 프록시, 포트 바인딩",
+    ],
+  },
+  {
+    title: "프론트엔드",
+    items: [
+      "React (TypeScript)",
+      "HTML, CSS, Tailwind",
+      "역할 기반 UI 패턴",
+      "컴포넌트 아키텍처",
+    ],
+  },
+  {
+    title: "인프라",
+    items: [
+      "Docker",
+      "NGINX",
+      "AWS EC2",
+      "Git & GitHub",
+      "Hugging Face Hub",
+    ],
+  },
+  {
+    title: "컴퓨터 비전",
+    items: [
+      "YOLO",
+      "MediaPipe",
+      "DeepSORT",
+      "ST-GCN",
+      "FaceNet, OSNet (Torchreid)",
+      "OpenCV",
+    ],
+  },
+  {
+    title: "프로그래밍 언어",
+    items: ["Python", "Java", "JavaScript", "C", "C++"],
   },
 ];
 
@@ -277,6 +487,62 @@ const navLinks: LinkItem[] = [
   { label: "Leadership", href: "#leadership" },
   { label: "Contact", href: "#contact" },
 ];
+
+const koNavLinks: LinkItem[] = [
+  { label: "소개", href: "#about" },
+  { label: "기술", href: "#skills" },
+  { label: "경력", href: "#experience" },
+  { label: "프로젝트", href: "#projects" },
+  { label: "연구", href: "#research" },
+  { label: "수상", href: "#awards" },
+  { label: "리더십", href: "#leadership" },
+  { label: "연락", href: "#contact" },
+];
+
+const sectionsKo: Record<string, { eyebrow?: string; title?: string; subtitle?: string }> = {
+  about: {
+    eyebrow: "소개",
+    title: "현장에서 통하는 엔지니어링",
+    subtitle: "배경, 집중 분야, 학문적 기반을 간결하게 정리했습니다.",
+  },
+  skills: {
+    eyebrow: "기술",
+    title: "AI·백엔드·웹 UI 핵심 스택",
+    subtitle: "핵심에 집중할 수 있도록 정리했습니다.",
+  },
+  experience: {
+    eyebrow: "경력",
+    title: "책임이 명확한 인턴십과 연구실 경험",
+    subtitle: "무엇을 배포했고 무엇을 담당했는지를 중심으로 정리했습니다.",
+  },
+  projects: {
+    eyebrow: "프로젝트",
+    title: "사례 연구 중심의 빌드",
+    subtitle: "문제 정의, 구현 내용, 성과를 간결하게 제시합니다.",
+  },
+  research: {
+    eyebrow: "연구",
+    title: "출판 및 평가 중심 연구",
+    subtitle: "현실적인 키오스크 환경에서의 대화형 AI 행동을 분석한 연구입니다.",
+  },
+  awards: {
+    eyebrow: "수상",
+    title: "수상 내역",
+    subtitle: "연구 및 대회를 통해 받은 주요 수상 내역입니다.",
+  },
+  leadership: {
+    eyebrow: "리더십",
+    title: "책임을 기반으로 한 역할",
+    subtitle: "조직 활동, 커뮤니티 기여, 기술 성장을 위한 경험입니다.",
+  },
+  contact: {
+    eyebrow: "연락",
+    title: "연결합시다",
+    subtitle: "인턴십, 연구, AI 시스템 및 풀스택 엔지니어링 관련 문의를 환영합니다.",
+  },
+};
+
+const CURRENT_YEAR = 2026;
 
 function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -369,9 +635,48 @@ function LinkButton({
 }
 
 export default function Home() {
+  // Stable default for SSR; hydrate preference after mount.
+  const [lang, setLang] = useState<"en" | "ko">("en");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    try {
+      const stored = localStorage.getItem("site_lang");
+      if (stored === "ko" || stored === "en") {
+        setLang(stored);
+        return;
+      }
+      if (navigator.language?.startsWith("ko")) {
+        setLang("ko");
+      }
+    } catch (e) {}
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    try {
+      localStorage.setItem("site_lang", lang);
+    } catch (e) {}
+    document.documentElement.lang = lang === "ko" ? "ko" : "en";
+  }, [lang, mounted]);
+
   const githubEnabled = Boolean(profile.links.github);
   const linkedinEnabled = Boolean(profile.links.linkedin);
   const emailEnabled = Boolean(profile.links.email);
+
+  const profileToRender = lang === "ko" ? koProfile : profile;
+  const navToRender = lang === "ko" ? koNavLinks : navLinks;
+  const experienceToRender = lang === "ko" ? koExperience : experience;
+  const projectsToRender = lang === "ko" ? koProjects : projects;
+  const researchToRender = lang === "ko" ? koResearch : research;
+  const leadershipToRender = lang === "ko" ? koLeadership : leadership;
+  const skillsToRender = lang === "ko" ? koSkills : skills;
+
+  const tSection = (key: string, fallback: { eyebrow?: string; title?: string; subtitle?: string }) => {
+    if (lang === "ko" && sectionsKo[key]) return sectionsKo[key];
+    return fallback;
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -393,7 +698,7 @@ export default function Home() {
           </a>
 
           <nav className="hidden items-center gap-5 text-sm text-muted md:flex">
-            {navLinks.map((item) => (
+            {navToRender.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -425,126 +730,180 @@ export default function Home() {
                 LinkedIn
               </a>
             ) : null}
+            <button
+              aria-label={lang === "ko" ? "영어로 전환" : "한국어로 전환"}
+              onClick={() => setLang((s) => (s === "ko" ? "en" : "ko"))}
+              className="ml-2 rounded-full border border-border/80 bg-surface/60 px-3 py-1 text-sm font-medium text-muted hover:text-foreground cursor-pointer"
+            >
+              {lang === "ko" ? "English" : "한국어"}
+            </button>
           </div>
         </div>
       </header>
 
       <main id="content">
-        <section id="top" className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 opacity-60">
-            <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
-          </div>
+  <section id="top" className="relative overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 opacity-60">
+      <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
+    </div>
 
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-            <div className="grid gap-10 md:grid-cols-12 md:items-center">
-              <div className="md:col-span-8">
-                <p className="text-sm font-medium text-muted">
-                  {profile.locationLine}
-                </p>
+    <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+      <div className="grid gap-10 md:grid-cols-12 md:items-center">
+        <div className="md:col-span-8">
+          <p className="text-sm font-medium text-muted">
+            {profileToRender.locationLine}
+          </p>
 
-                <h1
-                  className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
-                  style={{ fontFamily: "var(--font-geist-mono)" }}
-                >
-                  {profile.name} <span className="text-muted">({profile.nameNative})</span>
-                </h1>
+          <h1
+            className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
+            style={{ fontFamily: "var(--font-geist-mono)" }}
+          >
+            {profileToRender.name}{" "}
+            <span className="text-muted">({profileToRender.nameNative})</span>
+          </h1>
 
-                <p className="mt-5 text-lg leading-8 text-muted">
-                  {profile.subheadline}
-                </p>
+          <p className="mt-5 text-lg leading-8 text-muted">
+            {profileToRender.subheadline}
+          </p>
 
-                <div className="mt-7 flex flex-wrap items-center gap-4">
-                  <LinkButton label="View projects" href="#projects" variant="primary" />
-                  <LinkButton label="Contact" href="#contact" variant="secondary" />
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {profile.quickFacts.map((f) => (
-                    <Tag key={f}>{f}</Tag>
-                  ))}
-                </div>
-              </div>
-
-              <div className="md:col-span-4">
-                <Card>
-                  <div className="text-sm font-medium text-muted">Focus areas</div>
-                  <ul className="mt-4 space-y-2 text-sm text-foreground/90">
-                    <li>AI systems & LLM applications</li>
-                    <li>Conversational AI & RAG</li>
-                    <li>Web & backend engineering</li>
-                    <li>Research-oriented development</li>
-                    <li>Accessible, human-centered systems</li>
-                  </ul>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <SectionHeader
-              eyebrow="About"
-              title="Engineering that stays usable in real contexts"
-              subtitle="A concise snapshot of my background, focus, and academic foundation."
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <LinkButton
+              label={lang === "ko" ? "프로젝트 보기" : "View projects"}
+              href="#projects"
+              variant="primary"
             />
-
-            <div className="grid gap-8 md:grid-cols-12">
-              <div className="md:col-span-7">
-                <Card>
-                  <div className="space-y-4 text-base leading-7 text-muted">
-                    {profile.about.map((p) => (
-                      <p key={p}>{p}</p>
-                    ))}
-                  </div>
-                </Card>
-              </div>
-
-              <div className="md:col-span-5">
-                <div className="space-y-6">
-                  <Card>
-                    <div className="text-sm font-medium text-muted">
-                      Academic
-                    </div>
-                    <div className="mt-3 text-sm text-foreground/90">
-                      {profile.academics.school}
-                    </div>
-                    <div className="mt-2 text-sm text-muted">
-                      {profile.academics.gpa}
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {profile.academics.coursework.map((c) => (
-                        <Tag key={c}>{c}</Tag>
-                      ))}
-                    </div>
-                  </Card>
-
-                  <Card>
-                    <div className="text-sm font-medium text-muted">
-                      Languages
-                    </div>
-                    <ul className="mt-3 space-y-2 text-sm text-foreground/90">
-                      {profile.languages.map((l) => (
-                        <li key={l}>{l}</li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-              </div>
-            </div>
+            <LinkButton
+              label={lang === "ko" ? "연락하기" : "Contact"}
+              href="#contact"
+              variant="secondary"
+            />
           </div>
-        </section>
+
+          <div className="mt-8 flex flex-wrap gap-2">
+            {profileToRender.quickFacts.map((f) => (
+              <Tag key={f}>{f}</Tag>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:col-span-4">
+          <Card>
+            <div className="text-sm font-medium text-muted">
+              {lang === "ko" ? "주요 분야" : "Focus areas"}
+            </div>
+            <ul className="mt-4 space-y-2 text-sm text-foreground/90">
+              <li>
+                {lang === "ko"
+                  ? "AI 시스템 및 LLM 응용"
+                  : "AI systems and LLM applications"}
+              </li>
+              <li>
+                {lang === "ko"
+                  ? "대화형 AI 및 RAG"
+                  : "Conversational AI and RAG"}
+              </li>
+              <li>
+                {lang === "ko"
+                  ? "웹 및 백엔드 엔지니어링"
+                  : "Web and backend engineering"}
+              </li>
+              <li>
+                {lang === "ko"
+                  ? "연구 기반 개발"
+                  : "Research-driven development"}
+              </li>
+              <li>
+                {lang === "ko"
+                  ? "접근성 중심의 인간 중심 시스템"
+                  : "Accessible, human-centered systems"}
+              </li>
+            </ul>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" className="border-t border-border/60">
+    <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <SectionHeader
+        eyebrow={
+          tSection("about", { eyebrow: "About" }).eyebrow || "About"
+        }
+        title={
+          tSection("about", {
+            title: "Engineering that holds up in real-world contexts",
+          }).title || "Engineering that holds up in real-world contexts"
+        }
+        subtitle={
+          tSection("about", {
+            subtitle:
+              "A concise snapshot of my background, focus areas, and academic foundation.",
+          }).subtitle
+        }
+      />
+
+      <div className="grid gap-8 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <Card>
+            <div className="space-y-4 text-base leading-7 text-muted">
+              {(profileToRender.about || profile.about).map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        <div className="md:col-span-5">
+          <div className="space-y-6">
+            <Card>
+              <div className="text-sm font-medium text-muted">
+                {lang === "ko" ? "학력" : "Academics"}
+              </div>
+              <div className="mt-3 text-sm text-foreground/90">
+                {profileToRender.academics?.school ||
+                  profile.academics.school}
+              </div>
+              <div className="mt-2 text-sm text-muted">
+                {profileToRender.academics?.gpa ||
+                  profile.academics.gpa}
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {(profileToRender.academics?.coursework ||
+                  profile.academics.coursework).map((c) => (
+                  <Tag key={c}>{c}</Tag>
+                ))}
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-sm font-medium text-muted">
+                {lang === "ko" ? "언어" : "Languages"}
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-foreground/90">
+                {(profileToRender.languages || profile.languages).map(
+                  (l) => (
+                    <li key={l}>{l}</li>
+                  )
+                )}
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
         <section id="skills" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Skills"
-              title="A focused stack across AI, backend, and web UI"
-              subtitle="Grouped to keep signal high and avoid tool noise."
+              eyebrow={tSection("skills", { eyebrow: "Skills" }).eyebrow || "Skills"}
+              title={tSection("skills", { title: "Focused stack across AI, backend, and web UI" }).title || "Focused stack across AI, backend, and web UI"}
+              subtitle={tSection("skills", { subtitle: "Grouped to keep signal high and cut tool noise." }).subtitle}
             />
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {skills.map((group) => (
+              {skillsToRender.map((group) => (
                 <Card key={group.title}>
                   <div
                     className="text-base font-semibold tracking-tight text-foreground"
@@ -566,13 +925,13 @@ export default function Home() {
         <section id="experience" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Experience"
-              title="Internships and lab work with clear ownership"
-              subtitle="Short timeline entries with what shipped and what I owned."
+              eyebrow={tSection("experience", { eyebrow: "Experience" }).eyebrow || "Experience"}
+              title={tSection("experience", { title: "Internships and lab work with clear ownership" }).title || "Internships and lab work with clear ownership"}
+              subtitle={tSection("experience", { subtitle: "Brief timeline entries noting what shipped and what I owned." }).subtitle}
             />
 
             <div className="space-y-5">
-              {experience.map((item) => (
+              {experienceToRender.map((item) => (
                 <Card key={`${item.org}-${item.title}`}
                   >
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
@@ -618,13 +977,13 @@ export default function Home() {
         <section id="projects" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Projects"
-              title="Case-study style builds"
-              subtitle="A compact case-study format: what problem, what I built, and what it achieved."
+              eyebrow={tSection("projects", { eyebrow: "Projects" }).eyebrow || "Projects"}
+              title={tSection("projects", { title: "Case-study builds" }).title || "Case-study builds"}
+              subtitle={tSection("projects", { subtitle: "Compact case studies: the problem, what I built, and the outcome." }).subtitle}
             />
 
             <div className="space-y-5">
-              {projects.map((p) => (
+              {projectsToRender.map((p) => (
                 <Card key={p.title}>
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                     <div>
@@ -689,13 +1048,13 @@ export default function Home() {
         <section id="research" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Research"
-              title="Publication and evaluation work"
-              subtitle="Research work focused on conversational AI behavior in realistic kiosk settings."
+              eyebrow={tSection("research", { eyebrow: "Research" }).eyebrow || "Research"}
+              title={tSection("research", { title: "Publication and evaluation work" }).title || "Publication and evaluation work"}
+              subtitle={tSection("research", { subtitle: "Research on conversational AI behavior in realistic kiosk settings." }).subtitle}
             />
 
             <div className="space-y-5">
-              {research.map((r) => (
+              {researchToRender.map((r) => (
                 <Card key={r.title}>
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <div>
@@ -739,9 +1098,9 @@ export default function Home() {
         <section id="awards" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Awards"
-              title="Recognitions"
-              subtitle="Awards and acknowledgements from research and competitions."
+              eyebrow={tSection("awards", { eyebrow: "Awards" }).eyebrow || "Awards"}
+              title={tSection("awards", { title: "Recognitions" }).title || "Recognitions"}
+              subtitle={tSection("awards", { subtitle: "Awards and recognition from research and competitions." }).subtitle}
             />
 
             <div className="grid gap-5 md:grid-cols-2">
@@ -750,13 +1109,13 @@ export default function Home() {
                   className="text-base font-semibold tracking-tight text-foreground"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
-                  Excellent Paper Award
+                  {lang === "ko" ? "우수 논문상" : "Excellent Paper Award"}
                 </div>
                 <div className="mt-2 text-sm text-muted">
-                  UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams
+                  {lang === "ko" ? "UCWIT 2024 (KIISE 주최) — 47팀 중 Top 4" : "UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams"}
                 </div>
                 <div className="mt-4 text-sm leading-6 text-muted">
-                  Awarded for research evaluating LLaMA vs rule-based dialogue systems in voice-recognition kiosk scenarios.
+                  {lang === "ko" ? "음성 인식 키오스크 시나리오에서 LLaMA와 규칙 기반 대화 시스템을 비교한 연구로 수상." : "Awarded for research comparing LLaMA with rule-based dialogue systems in voice-recognition kiosk scenarios."}
                 </div>
               </Card>
 
@@ -765,13 +1124,13 @@ export default function Home() {
                   className="text-base font-semibold tracking-tight text-foreground"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
-                  Dance & Debate
+                  {lang === "ko" ? "댄스 및 토론" : "Dance & Debate"}
                 </div>
                 <div className="mt-2 text-sm text-muted">
-                  Multiple awards · Bilingual debating (Korean & English)
+                  {lang === "ko" ? "다수 수상 · 이중언어 토론(한국어 · 영어)" : "Multiple awards · Bilingual debating (Korean & English)"}
                 </div>
                 <div className="mt-4 text-sm leading-6 text-muted">
-                  Competitive participation alongside technical work and leadership roles.
+                  {lang === "ko" ? "기술 작업과 리더십 활동과 병행하며 경쟁에 참여했습니다." : "Competitive participation alongside technical and leadership work."}
                 </div>
               </Card>
             </div>
@@ -781,13 +1140,13 @@ export default function Home() {
         <section id="leadership" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Leadership"
-              title="Roles built on responsibility"
-              subtitle="Activities that reflect coordination, community work, and technical growth."
+              eyebrow={tSection("leadership", { eyebrow: "Leadership" }).eyebrow || "Leadership"}
+              title={tSection("leadership", { title: "Roles built on responsibility" }).title || "Roles built on responsibility"}
+              subtitle={tSection("leadership", { subtitle: "Activities reflecting coordination, community work, and technical growth." }).subtitle}
             />
 
             <div className="grid gap-5 sm:grid-cols-2">
-              {leadership.map((l) => (
+              {leadershipToRender.map((l) => (
                 <Card key={l.title}>
                   <div
                     className="text-base font-semibold tracking-tight text-foreground"
@@ -807,16 +1166,16 @@ export default function Home() {
         <section id="contact" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow="Contact"
-              title="Let’s connect"
-              subtitle="For internships, research, or engineering roles in AI systems, RAG, and full-stack work."
+              eyebrow={tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"}
+              title={tSection("contact", { title: "Let’s connect" }).title || "Let’s connect"}
+              subtitle={tSection("contact", { subtitle: "For internships, research, or engineering roles across AI systems, RAG, and full-stack work." }).subtitle}
             />
 
             <Card>
               <div className="flex flex-wrap gap-4">
                 {githubEnabled ? (
                   <LinkButton
-                    label="GitHub"
+                    label={lang === "ko" ? "GitHub" : "GitHub"}
                     href={profile.links.github}
                     variant="primary"
                   />
@@ -824,7 +1183,7 @@ export default function Home() {
 
                 {linkedinEnabled ? (
                   <LinkButton
-                    label="LinkedIn"
+                    label={lang === "ko" ? "LinkedIn" : "LinkedIn"}
                     href={profile.links.linkedin}
                     variant="secondary"
                   />
@@ -833,9 +1192,9 @@ export default function Home() {
             </Card>
 
             <footer className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-border/60 pt-8 text-sm text-muted sm:flex-row sm:items-center">
-              <div>© {new Date().getFullYear()} {profile.name}</div>
+              <div>© {mounted ? new Date().getFullYear() : CURRENT_YEAR} {profileToRender.name}</div>
               <div className="text-muted-2">
-                Built with Next.js + Tailwind
+                {lang === "ko" ? "Next.js + Tailwind로 제작" : "Built with Next.js + Tailwind"}
               </div>
             </footer>
           </div>
