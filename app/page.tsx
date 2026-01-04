@@ -601,7 +601,7 @@ function LinkButton({
 }) {
   const base =
     "inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition-all duration-300 ease-out transform";
-  
+
   const primaryStyles = [
     "bg-gradient-to-r from-accent to-accent-2 text-white",
     "shadow-lg shadow-accent/25",
@@ -609,14 +609,14 @@ function LinkButton({
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "active:scale-100"
   ].join(" ");
-  
+
   const secondaryStyles = [
     "border-2 border-border bg-surface/60 text-foreground shadow-md backdrop-blur-sm",
     "hover:bg-surface-2 hover:border-accent/50 hover:shadow-lg hover:scale-105 hover:-translate-y-0.5",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "active:scale-100"
   ].join(" ");
-  
+
   const variants = {
     primary: primaryStyles,
     secondary: secondaryStyles,
@@ -650,14 +650,14 @@ export default function Home() {
       if (navigator.language?.startsWith("ko")) {
         setLang("ko");
       }
-    } catch (e) {}
+    } catch (e) { }
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
     try {
       localStorage.setItem("site_lang", lang);
-    } catch (e) {}
+    } catch (e) { }
     document.documentElement.lang = lang === "ko" ? "ko" : "en";
   }, [lang, mounted]);
 
@@ -742,164 +742,172 @@ export default function Home() {
       </header>
 
       <main id="content">
-  <section id="top" className="relative overflow-hidden">
-    <div className="pointer-events-none absolute inset-0 opacity-60">
-      <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
-    </div>
-
-    <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-      <div className="grid gap-10 md:grid-cols-12 md:items-center">
-        <div className="md:col-span-8">
-          <p className="text-sm font-medium text-muted">
-            {profileToRender.locationLine}
-          </p>
-
-          <h1
-            className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
-            style={{ fontFamily: "var(--font-geist-mono)" }}
-          >
-            {profileToRender.name}{" "}
-            <span className="text-muted">({profileToRender.nameNative})</span>
-          </h1>
-
-          <p className="mt-5 text-lg leading-8 text-muted">
-            {profileToRender.subheadline}
-          </p>
-
-          <div className="mt-7 flex flex-wrap items-center gap-4">
-            <LinkButton
-              label={lang === "ko" ? "프로젝트 보기" : "View projects"}
-              href="#projects"
-              variant="primary"
-            />
-            <LinkButton
-              label={lang === "ko" ? "연락하기" : "Contact"}
-              href="#contact"
-              variant="secondary"
-            />
+        <section id="top" className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 opacity-60">
+            <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-2">
-            {profileToRender.quickFacts.map((f) => (
-              <Tag key={f}>{f}</Tag>
-            ))}
-          </div>
-        </div>
+          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+            <div className="grid gap-10 md:grid-cols-12 md:items-center">
+              <div className="md:col-span-8">
+                <p className="text-sm font-medium text-muted">
+                  {profileToRender.locationLine}
+                </p>
 
-        <div className="md:col-span-4">
-          <Card>
-            <div className="text-sm font-medium text-muted">
-              {lang === "ko" ? "주요 분야" : "Focus areas"}
+                <h1
+                  className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
+                  style={{ fontFamily: "var(--font-geist-mono)" }}
+                >
+                  {profileToRender.name}{" "}
+                  <span className="text-muted">({profileToRender.nameNative})</span>
+                </h1>
+
+                <p className="mt-5 text-lg leading-8 text-muted">
+                  {profileToRender.subheadline}
+                </p>
+
+                <div className="mt-7 flex flex-wrap items-center gap-4">
+                  <LinkButton
+                    label={lang === "ko" ? "프로젝트 보기" : "View projects"}
+                    href="#projects"
+                    variant="primary"
+                  />
+                  <LinkButton
+                    label={lang === "ko" ? "연락하기" : "Contact"}
+                    href="#contact"
+                    variant="secondary"
+                  />
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {profileToRender.quickFacts.map((f) => (
+                    <Tag key={f}>{f}</Tag>
+                  ))}
+                </div>
+              </div>
+
+              <div className="md:col-span-4">
+                <Card>
+                  <div className="text-sm font-medium text-muted">
+                    {lang === "ko" ? "주요 분야" : "Focus areas"}
+                  </div>
+                  <ul className="mt-4 space-y-2 text-sm text-foreground/90">
+                    <li>
+                      {lang === "ko"
+                        ? "AI 시스템 및 LLM 응용"
+                        : "AI systems and LLM applications"}
+                    </li>
+                    <li>
+                      {lang === "ko"
+                        ? "대화형 AI 및 RAG"
+                        : "Conversational AI and RAG"}
+                    </li>
+                    <li>
+                      {lang === "ko"
+                        ? "웹 및 백엔드 엔지니어링"
+                        : "Web and backend engineering"}
+                    </li>
+                    <li>
+                      {lang === "ko"
+                        ? "연구 기반 개발"
+                        : "Research-driven development"}
+                    </li>
+                    <li>
+                      {lang === "ko"
+                        ? "접근성 중심의 인간 중심 시스템"
+                        : "Accessible, human-centered systems"}
+                    </li>
+                  </ul>
+                </Card>
+              </div>
             </div>
-            <ul className="mt-4 space-y-2 text-sm text-foreground/90">
-              <li>
-                {lang === "ko"
-                  ? "AI 시스템 및 LLM 응용"
-                  : "AI systems and LLM applications"}
-              </li>
-              <li>
-                {lang === "ko"
-                  ? "대화형 AI 및 RAG"
-                  : "Conversational AI and RAG"}
-              </li>
-              <li>
-                {lang === "ko"
-                  ? "웹 및 백엔드 엔지니어링"
-                  : "Web and backend engineering"}
-              </li>
-              <li>
-                {lang === "ko"
-                  ? "연구 기반 개발"
-                  : "Research-driven development"}
-              </li>
-              <li>
-                {lang === "ko"
-                  ? "접근성 중심의 인간 중심 시스템"
-                  : "Accessible, human-centered systems"}
-              </li>
-            </ul>
-          </Card>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" className="border-t border-border/60">
-    <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-      <SectionHeader
-        eyebrow={
-          tSection("about", { eyebrow: "About" }).eyebrow || "About"
-        }
-        title={
-          tSection("about", {
-            title: "Engineering that holds up in real-world contexts",
-          }).title || "Engineering that holds up in real-world contexts"
-        }
-        subtitle={
-          tSection("about", {
-            subtitle:
-              "A concise snapshot of my background, focus areas, and academic foundation.",
-          }).subtitle
-        }
-      />
-
-      <div className="grid gap-8 md:grid-cols-12">
-        <div className="md:col-span-7">
-          <Card>
-            <div className="space-y-4 text-base leading-7 text-muted">
-              {(profileToRender.about || profile.about).map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-          </Card>
-        </div>
-
-        <div className="md:col-span-5">
-          <div className="space-y-6">
-            <Card>
-              <div className="text-sm font-medium text-muted">
-                {lang === "ko" ? "학력" : "Academics"}
-              </div>
-              <div className="mt-3 text-sm text-foreground/90">
-                {profileToRender.academics?.school ||
-                  profile.academics.school}
-              </div>
-              <div className="mt-2 text-sm text-muted">
-                {profileToRender.academics?.gpa ||
-                  profile.academics.gpa}
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {(profileToRender.academics?.coursework ||
-                  profile.academics.coursework).map((c) => (
-                  <Tag key={c}>{c}</Tag>
-                ))}
-              </div>
-            </Card>
-
-            <Card>
-              <div className="text-sm font-medium text-muted">
-                {lang === "ko" ? "언어" : "Languages"}
-              </div>
-              <ul className="mt-3 space-y-2 text-sm text-foreground/90">
-                {(profileToRender.languages || profile.languages).map(
-                  (l) => (
-                    <li key={l}>{l}</li>
-                  )
-                )}
-              </ul>
-            </Card>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
+
+        <section id="about" className="border-t border-border/60">
+          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+            <SectionHeader
+              eyebrow={
+                tSection("about", { eyebrow: "About" }).eyebrow || "About"
+              }
+              title={
+                tSection("about", {
+                  title: "Engineering that holds up in real-world contexts",
+                }).title || "Engineering that holds up in real-world contexts"
+              }
+              subtitle={
+                tSection("about", {
+                  subtitle:
+                    "A concise snapshot of my background, focus areas, and academic foundation.",
+                }).subtitle
+              }
+            />
+
+            <div className="grid gap-8 md:grid-cols-12">
+              <div className="md:col-span-7">
+                <Card>
+                  <div className="space-y-4 text-base leading-7 text-muted">
+                    {(profileToRender.about || profile.about).map((p) => (
+                      <p key={p}>{p}</p>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+
+              <div className="md:col-span-5">
+                <div className="space-y-6">
+                  <Card>
+                    <div className="text-sm font-medium text-muted">
+                      {lang === "ko" ? "학력" : "Academics"}
+                    </div>
+                    <div className="mt-3 text-sm text-foreground/90">
+                      {profileToRender.academics?.school ||
+                        profile.academics.school}
+                    </div>
+                    <div className="mt-2 text-sm text-muted">
+                      {profileToRender.academics?.gpa ||
+                        profile.academics.gpa}
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {(profileToRender.academics?.coursework ||
+                        profile.academics.coursework).map((c) => (
+                          <Tag key={c}>{c}</Tag>
+                        ))}
+                    </div>
+                  </Card>
+
+                  <Card>
+                    <div className="text-sm font-medium text-muted">
+                      {lang === "ko" ? "언어" : "Languages"}
+                    </div>
+                    <ul className="mt-3 space-y-2 text-sm text-foreground/90">
+                      {(profileToRender.languages || profile.languages).map(
+                        (l) => (
+                          <li key={l}>{l}</li>
+                        )
+                      )}
+                    </ul>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="skills" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
               eyebrow={tSection("skills", { eyebrow: "Skills" }).eyebrow || "Skills"}
-              title={tSection("skills", { title: "Focused stack across AI, backend, and web UI" }).title || "Focused stack across AI, backend, and web UI"}
-              subtitle={tSection("skills", { subtitle: "Grouped to keep signal high and cut tool noise." }).subtitle}
+              title={
+                tSection("skills", {
+                  title: "A focused stack across AI, backend, and web UI",
+                }).title || "A focused stack across AI, backend, and web UI"
+              }
+              subtitle={
+                tSection("skills", {
+                  subtitle: "Grouped to keep signal high and reduce tool noise.",
+                }).subtitle
+              }
             />
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -925,15 +933,26 @@ export default function Home() {
         <section id="experience" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow={tSection("experience", { eyebrow: "Experience" }).eyebrow || "Experience"}
-              title={tSection("experience", { title: "Internships and lab work with clear ownership" }).title || "Internships and lab work with clear ownership"}
-              subtitle={tSection("experience", { subtitle: "Brief timeline entries noting what shipped and what I owned." }).subtitle}
+              eyebrow={
+                tSection("experience", { eyebrow: "Experience" }).eyebrow ||
+                "Experience"
+              }
+              title={
+                tSection("experience", {
+                  title: "Internships and lab work with clear ownership",
+                }).title || "Internships and lab work with clear ownership"
+              }
+              subtitle={
+                tSection("experience", {
+                  subtitle:
+                    "Concise timeline entries highlighting what shipped and what I owned.",
+                }).subtitle
+              }
             />
 
             <div className="space-y-5">
               {experienceToRender.map((item) => (
-                <Card key={`${item.org}-${item.title}`}
-                  >
+                <Card key={`${item.org}-${item.title}`}>
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                     <div>
                       <div
@@ -942,9 +961,7 @@ export default function Home() {
                       >
                         {item.title}
                       </div>
-                      <div className="mt-1 text-sm text-muted">
-                        {item.org}
-                      </div>
+                      <div className="mt-1 text-sm text-muted">{item.org}</div>
                     </div>
                     <div className="text-sm font-medium text-muted">
                       {item.dates}
@@ -952,9 +969,7 @@ export default function Home() {
                   </div>
 
                   {item.note ? (
-                    <div className="mt-3 text-sm text-muted">
-                      ⚠ {item.note}
-                    </div>
+                    <div className="mt-3 text-sm text-muted">⚠ {item.note}</div>
                   ) : null}
 
                   <ul className="mt-4 space-y-2 text-sm leading-6 text-muted">
@@ -977,9 +992,19 @@ export default function Home() {
         <section id="projects" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow={tSection("projects", { eyebrow: "Projects" }).eyebrow || "Projects"}
-              title={tSection("projects", { title: "Case-study builds" }).title || "Case-study builds"}
-              subtitle={tSection("projects", { subtitle: "Compact case studies: the problem, what I built, and the outcome." }).subtitle}
+              eyebrow={
+                tSection("projects", { eyebrow: "Projects" }).eyebrow || "Projects"
+              }
+              title={
+                tSection("projects", { title: "Case-study builds" }).title ||
+                "Case-study builds"
+              }
+              subtitle={
+                tSection("projects", {
+                  subtitle:
+                    "Compact case studies showing the problem, what I built, and the outcome.",
+                }).subtitle
+              }
             />
 
             <div className="space-y-5">
@@ -1030,10 +1055,16 @@ export default function Home() {
                           </ul>
                         </>
                       ) : null}
+
                       {p.repoLinks && p.repoLinks.length > 0 ? (
                         <div className="mt-6 flex flex-wrap gap-3">
                           {p.repoLinks.map((r) => (
-                            <LinkButton key={r.href} label={r.label} href={r.href} variant="secondary" />
+                            <LinkButton
+                              key={r.href}
+                              label={r.label}
+                              href={r.href}
+                              variant="secondary"
+                            />
                           ))}
                         </div>
                       ) : null}
@@ -1048,9 +1079,20 @@ export default function Home() {
         <section id="research" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow={tSection("research", { eyebrow: "Research" }).eyebrow || "Research"}
-              title={tSection("research", { title: "Publication and evaluation work" }).title || "Publication and evaluation work"}
-              subtitle={tSection("research", { subtitle: "Research on conversational AI behavior in realistic kiosk settings." }).subtitle}
+              eyebrow={
+                tSection("research", { eyebrow: "Research" }).eyebrow || "Research"
+              }
+              title={
+                tSection("research", {
+                  title: "Publication and evaluation work",
+                }).title || "Publication and evaluation work"
+              }
+              subtitle={
+                tSection("research", {
+                  subtitle:
+                    "Research on conversational AI behavior in realistic kiosk environments.",
+                }).subtitle
+              }
             />
 
             <div className="space-y-5">
@@ -1082,10 +1124,16 @@ export default function Home() {
                       <Tag key={s}>{s}</Tag>
                     ))}
                   </div>
+
                   {r.repoLinks && r.repoLinks.length > 0 ? (
                     <div className="mt-5 flex flex-wrap gap-3">
                       {r.repoLinks.map((rl) => (
-                        <LinkButton key={rl.href} label={rl.label} href={rl.href} variant="secondary" />
+                        <LinkButton
+                          key={rl.href}
+                          label={rl.label}
+                          href={rl.href}
+                          variant="secondary"
+                        />
                       ))}
                     </div>
                   ) : null}
@@ -1099,8 +1147,14 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
               eyebrow={tSection("awards", { eyebrow: "Awards" }).eyebrow || "Awards"}
-              title={tSection("awards", { title: "Recognitions" }).title || "Recognitions"}
-              subtitle={tSection("awards", { subtitle: "Awards and recognition from research and competitions." }).subtitle}
+              title={
+                tSection("awards", { title: "Recognitions" }).title || "Recognitions"
+              }
+              subtitle={
+                tSection("awards", {
+                  subtitle: "Awards and recognition from research and competitions.",
+                }).subtitle
+              }
             />
 
             <div className="grid gap-5 md:grid-cols-2">
@@ -1112,10 +1166,14 @@ export default function Home() {
                   {lang === "ko" ? "우수 논문상" : "Excellent Paper Award"}
                 </div>
                 <div className="mt-2 text-sm text-muted">
-                  {lang === "ko" ? "UCWIT 2024 (KIISE 주최) — 47팀 중 Top 4" : "UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams"}
+                  {lang === "ko"
+                    ? "UCWIT 2024 (KIISE 주최) — 47팀 중 Top 4"
+                    : "UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams"}
                 </div>
                 <div className="mt-4 text-sm leading-6 text-muted">
-                  {lang === "ko" ? "음성 인식 키오스크 시나리오에서 LLaMA와 규칙 기반 대화 시스템을 비교한 연구로 수상." : "Awarded for research comparing LLaMA with rule-based dialogue systems in voice-recognition kiosk scenarios."}
+                  {lang === "ko"
+                    ? "음성 인식 키오스크 시나리오에서 LLaMA와 규칙 기반 대화 시스템을 비교한 연구로 수상."
+                    : "Awarded for research comparing LLaMA with rule-based dialogue systems in voice-recognition kiosk scenarios."}
                 </div>
               </Card>
 
@@ -1127,10 +1185,14 @@ export default function Home() {
                   {lang === "ko" ? "댄스 및 토론" : "Dance & Debate"}
                 </div>
                 <div className="mt-2 text-sm text-muted">
-                  {lang === "ko" ? "다수 수상 · 이중언어 토론(한국어 · 영어)" : "Multiple awards · Bilingual debating (Korean & English)"}
+                  {lang === "ko"
+                    ? "다수 수상 · 이중언어 토론(한국어 · 영어)"
+                    : "Multiple awards · Bilingual debating (Korean & English)"}
                 </div>
                 <div className="mt-4 text-sm leading-6 text-muted">
-                  {lang === "ko" ? "기술 작업과 리더십 활동과 병행하며 경쟁에 참여했습니다." : "Competitive participation alongside technical and leadership work."}
+                  {lang === "ko"
+                    ? "기술 프로젝트와 리더십 활동과 병행하며 대회에 참여했습니다."
+                    : "Competitive participation alongside technical and leadership work."}
                 </div>
               </Card>
             </div>
@@ -1140,9 +1202,21 @@ export default function Home() {
         <section id="leadership" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow={tSection("leadership", { eyebrow: "Leadership" }).eyebrow || "Leadership"}
-              title={tSection("leadership", { title: "Roles built on responsibility" }).title || "Roles built on responsibility"}
-              subtitle={tSection("leadership", { subtitle: "Activities reflecting coordination, community work, and technical growth." }).subtitle}
+              eyebrow={
+                tSection("leadership", { eyebrow: "Leadership" }).eyebrow ||
+                "Leadership"
+              }
+              title={
+                tSection("leadership", {
+                  title: "Roles built on responsibility",
+                }).title || "Roles built on responsibility"
+              }
+              subtitle={
+                tSection("leadership", {
+                  subtitle:
+                    "Activities reflecting coordination, community involvement, and technical growth.",
+                }).subtitle
+              }
             />
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -1166,16 +1240,26 @@ export default function Home() {
         <section id="contact" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHeader
-              eyebrow={tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"}
-              title={tSection("contact", { title: "Let’s connect" }).title || "Let’s connect"}
-              subtitle={tSection("contact", { subtitle: "For internships, research, or engineering roles across AI systems, RAG, and full-stack work." }).subtitle}
+              eyebrow={
+                tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"
+              }
+              title={
+                tSection("contact", { title: "Let’s connect" }).title ||
+                "Let’s connect"
+              }
+              subtitle={
+                tSection("contact", {
+                  subtitle:
+                    "For internships, research, or engineering roles across AI systems, RAG, and full-stack development.",
+                }).subtitle
+              }
             />
 
             <Card>
               <div className="flex flex-wrap gap-4">
                 {githubEnabled ? (
                   <LinkButton
-                    label={lang === "ko" ? "GitHub" : "GitHub"}
+                    label="GitHub"
                     href={profile.links.github}
                     variant="primary"
                   />
@@ -1183,7 +1267,7 @@ export default function Home() {
 
                 {linkedinEnabled ? (
                   <LinkButton
-                    label={lang === "ko" ? "LinkedIn" : "LinkedIn"}
+                    label="LinkedIn"
                     href={profile.links.linkedin}
                     variant="secondary"
                   />
@@ -1192,9 +1276,14 @@ export default function Home() {
             </Card>
 
             <footer className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-border/60 pt-8 text-sm text-muted sm:flex-row sm:items-center">
-              <div>© {mounted ? new Date().getFullYear() : CURRENT_YEAR} {profileToRender.name}</div>
+              <div>
+                © {mounted ? new Date().getFullYear() : CURRENT_YEAR}{" "}
+                {profileToRender.name}
+              </div>
               <div className="text-muted-2">
-                {lang === "ko" ? "Next.js + Tailwind로 제작" : "Built with Next.js + Tailwind"}
+                {lang === "ko"
+                  ? "Next.js와 Tailwind로 제작"
+                  : "Built with Next.js and Tailwind"}
               </div>
             </footer>
           </div>
