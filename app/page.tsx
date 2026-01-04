@@ -284,7 +284,7 @@ function cx(...classes: Array<string | false | null | undefined>) {
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-border/80 bg-surface/60 px-2.5 py-1 text-xs font-medium text-foreground/90">
+    <span className="inline-flex items-center rounded-full border border-border/80 bg-surface/60 px-3 py-1.5 text-xs font-medium text-foreground/90 shadow-sm transition-all duration-200 hover:bg-surface-2/80 hover:border-accent/40 hover:shadow-md backdrop-blur-sm">
       {children}
     </span>
   );
@@ -318,7 +318,7 @@ function SectionHeader({
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border/80 bg-surface/60 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)] transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:border-border">
+    <div className="rounded-2xl border border-border/80 bg-surface/60 p-6 shadow-lg shadow-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:border-border backdrop-blur-sm">
       {children}
     </div>
   );
@@ -334,12 +334,12 @@ function LinkButton({
   variant: "primary" | "secondary";
 }) {
   const base =
-    "inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-medium transition-colors duration-200";
+    "inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition-all duration-300 ease-out transform";
   const variants = {
     primary:
-      "bg-foreground text-background hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-0",
+      "bg-gradient-to-r from-accent to-accent-2 text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/40 hover:scale-105 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-100",
     secondary:
-      "border border-border/80 bg-surface/40 text-foreground hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60",
+      "border-2 border-border bg-surface/60 text-foreground shadow-md hover:bg-surface-2 hover:border-accent/50 hover:shadow-lg hover:scale-105 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-100 backdrop-blur-sm",
   } as const;
 
   return (
@@ -363,16 +363,16 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <a
         href="#content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:text-foreground focus:ring-2 focus:ring-accent/60"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background focus:shadow-lg"
       >
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/70 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-xl shadow-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
           <a
             href="#top"
-            className="text-sm font-semibold tracking-tight text-foreground"
+            className="text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             {profile.name}
@@ -383,18 +383,18 @@ export default function Home() {
               <a
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-foreground"
+                className="relative transition-colors hover:text-foreground after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             {githubEnabled ? (
               <a
                 href={profile.links.github}
-                className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+                className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -404,7 +404,7 @@ export default function Home() {
             {linkedinEnabled ? (
               <a
                 href={profile.links.linkedin}
-                className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+                className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -439,7 +439,7 @@ export default function Home() {
                   {profile.subheadline}
                 </p>
 
-                <div className="mt-7 flex flex-wrap items-center gap-3">
+                <div className="mt-7 flex flex-wrap items-center gap-4">
                   <LinkButton label="View projects" href="#projects" variant="primary" />
                   <LinkButton label="Contact" href="#contact" variant="secondary" />
                 </div>
@@ -693,7 +693,7 @@ export default function Home() {
                       </div>
                       <div className="mt-1 text-sm text-muted">{r.venue}</div>
                     </div>
-                    <div className="inline-flex rounded-full border border-border/80 bg-surface/50 px-3 py-1 text-sm font-medium text-foreground">
+                    <div className="inline-flex rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent-2/10 px-4 py-1.5 text-sm font-semibold text-foreground shadow-md shadow-accent/20 backdrop-blur-sm">
                       {r.award}
                     </div>
                   </div>
@@ -799,7 +799,7 @@ export default function Home() {
             />
 
             <Card>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 {githubEnabled ? (
                   <LinkButton
                     label="GitHub"
