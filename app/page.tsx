@@ -2,7 +2,9 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { projectCards } from "./projects/data";
 type LinkItem = {
   label: string;
   href: string;
@@ -42,7 +44,7 @@ const profile = {
   nameNative: "니스타",
   headline: "AI systems · LLM applications · full-stack engineering",
   subheadline:
-    "Computer Science & Engineering (KNU, 2022–2026). Research-driven development with production-grade delivery.",
+    "I am a Computer Science undergraduate at Kyungpook National University, specializing in AI systems and Large Language Models. My work focuses on building research-driven, production-ready AI applications, including conversational AI, RAG systems, and accessible interfaces. I bridge rigorous evaluation with real-world deployment to create systems that work beyond the lab.",
   quickFacts: [
     "Kyungpook National University (KNU)",
     "TOPIK Level 5",
@@ -53,28 +55,32 @@ const profile = {
     github: "https://github.com/NishthaLath",
     linkedin: "https://www.linkedin.com/in/nishtha-lath-335206276/",
     email: "",
+    resumeEn: "https://drive.google.com/file/d/1OTfZOcni_pwuJHin3wRD9-DwDqyCFwpb/view?usp=drive_link",
+    resumeKo: "https://drive.google.com/file/d/10VST30cYUv_vhqYBp_Wz-EuZXED7arHb/view?usp=drive_link",
   },
   about: [
-    "I am a Computer Science & Engineering undergraduate at Kyungpook National University (2022–2026). My work sits at the intersection of LLM applications—such as RAG and conversational systems—and software engineering, spanning FastAPI backends and React frontends.",
-    "I focus on building systems that remain reliable in real-world conditions, including ambiguous language, noisy data, and real users, with particular emphasis on accessibility-focused kiosks and intelligent assistants.",
+    "I focus on building AI systems that move from research to real-world use.",
+    "My work spans LLM applications, RAG pipelines, and full-stack deployment, with strong attention to reliability and accessibility.",
+    "I enjoy owning systems end-to-end — from design and evaluation to production and iteration.",
   ],
-  academics: {
-    school:
-      "Kyungpook National University (KNU), South Korea — B.S. in Computer Science & Engineering (2022–2026)",
-    gpa: "GPA: 3.55 / 4.3 · Current semester GPA: 3.77 / 4.3",
-    coursework: [
-      "Artificial Intelligence & Machine Learning",
-      "Operating Systems",
-      "Network Programming",
-      "Database Systems",
-      "Software Engineering",
-      "Cybersecurity Fundamentals",
-    ],
+  education: {
+    school: "Kyungpook National University (KNU)",
+    degree: "B.S. in Computer Science & Engineering (2022–2026)",
+    gpa: "GPA: 3.55 / 4.3",
+    recentGpa: "Recent GPA: 3.77 / 4.3",
+    focus: "Focus: AI Systems, Software Engineering, Systems & Networks",
   },
+  softSkills: [
+    "Analytical problem solving",
+    "Clear technical communication",
+    "Team leadership & ownership",
+    "Cross-cultural collaboration",
+    "Fast learner in ambiguous environments",
+  ],
   languages: [
-    "English — Fluent",
-    "Hindi — Native",
-    "Korean — Advanced (TOPIK Level 5)",
+    "English: Fluent",
+    "Korean: Advanced (TOPIK 5)",
+    "Hindi: Native",
   ],
 };
 
@@ -83,21 +89,34 @@ const koProfile = {
   nameNative: "Lath Nishtha",
   headline: "AI 시스템 · LLM 응용 · 풀스택 엔지니어링",
   subheadline:
-    "경북대학교 컴퓨터학부 심화컴퓨터공학전공 학부생(2022–2026). 연구 기반 개발과 실무 배포를 연결하는 작업을 수행합니다.",
+    "경북대학교 컴퓨터공학과에 재학 중인 학생으로, AI 시스템과 대규모 언어 모델(LLM)을 중심으로 연구 및 개발을 수행하고 있습니다. 대화형 AI, RAG 시스템, 접근성 중심 인터페이스 등 연구 기반이면서 실제 환경에서 동작하는 AI 서비스를 구현해 왔습니다. 이론과 실무를 연결하여, 실험실을 넘어 현장에서 신뢰받는 시스템을 만드는 것을 목표로 합니다.",
   quickFacts: ["경북대학교 (KNU)", "TOPIK 5급", "AI · 웹 시스템"],
   locationLine: "Hello! I'm",
   links: profile.links,
   about: [
-    "저는 경북대학교 컴퓨터학부 심화컴퓨터공학전공에 재학 중인 학부생(2022–2026)으로, RAG 및 대화형 시스템과 같은 LLM 응용과 소프트웨어 엔지니어링을 결합한 개발을 수행하고 있습니다.",
-    "모호한 언어 입력과 잡음이 섞인 데이터, 실제 사용자가 존재하는 환경에서도 안정적으로 동작하는 시스템을 지향하며, 특히 접근성 중심의 키오스크와 지능형 보조 시스템에 관심이 있습니다.",
+    "연구 단계에 머무르지 않고 실제 환경에서 동작하는 AI 시스템 구현에 집중하고 있습니다.",
+    "LLM 응용, RAG 파이프라인, 풀스택 배포까지 전반을 다루며, 신뢰성과 접근성을 중요하게 생각합니다.",
+    "설계부터 평가, 배포, 개선까지 시스템 전체를 책임지고 만드는 과정을 선호합니다.",
   ],
-  academics: {
-    school:
-      "경북대학교 (KNU), 대한민국 — 컴퓨터학부 심화컴퓨터공학전공 학사 (2022–2026)",
-    gpa: "평점: 3.55 / 4.3 · 현재 학기 평점: 3.77 / 4.3",
-    coursework: profile.academics.coursework,
+  education: {
+    school: "경북대학교 (KNU)",
+    degree: "컴퓨터공학 학사 (2022–2026)",
+    gpa: "전체 평점: 3.55 / 4.3",
+    recentGpa: "최근 학기 평점: 3.77 / 4.3",
+    focus: "관심 분야: AI 시스템, 소프트웨어 공학, 시스템·네트워크",
   },
-  languages: ["영어 — 상급", "힌디어 — 원어민", "한국어 — 상급 (TOPIK 5급)"],
+  softSkills: [
+    "분석적 문제 해결 능력",
+    "명확한 기술 커뮤니케이션",
+    "리더십과 오너십",
+    "다문화 협업 경험",
+    "불확실한 환경에서의 빠른 학습 능력",
+  ],
+  languages: [
+    "영어: 유창",
+    "한국어: 고급 (TOPIK 5급)",
+    "힌디어: 모국어",
+  ],
 };
 
 const skills = [
@@ -181,7 +200,7 @@ const experience: ExperienceItem[] = [
     title: "Undergraduate Lab Intern",
     org: "Intelligent Software Systems Lab",
     dates: "Oct 2025 – Dec 2025",
-    note: "Dates align with the resume; update if extended.",
+    note: "",
     bullets: [
       "Developed a RAG-based disaster response assistant integrating legal manuals, population datasets, and geospatial risk data.",
       "Implemented FAISS-based retrieval, LangChain pipelines, and an optimized FastAPI backend to handle heterogeneous inputs.",
@@ -745,10 +764,10 @@ export default function Home() {
       <main id="content">
         <section id="top" className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 opacity-60">
-            <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
+            <div className="absolute -top-30 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
           </div>
 
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
             <div className="grid gap-10 md:grid-cols-12 md:items-center">
               <div className="md:col-span-8">
                 <p className="text-lg font-semibold text-foreground">
@@ -769,9 +788,9 @@ export default function Home() {
 
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <LinkButton
-                    label={lang === "ko" ? "프로젝트 보기" : "View projects"}
-                    href="#projects"
-                    variant="primary"
+                    label={lang === "ko" ? "내 이력서" : "My Resume"}
+                    href={lang === "ko" ? profile.links.resumeKo : profile.links.resumeEn}
+                    variant="secondary"
                   />
                   <LinkButton
                     label={lang === "ko" ? "연락하기" : "Contact"}
@@ -782,19 +801,22 @@ export default function Home() {
 
               </div>
 
-              <div className="md:col-span-4">
-                <Card className="p-0 overflow-hidden">
-                  <div className="relative aspect-[4/5]">
-                    <Image
-                      src="/Profile_image.png"
-                      alt="Profile image of Nishtha Lath"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 360px"
-                      className="object-cover"
-                      priority
-                    />
+              <div className="md:col-span-4 flex justify-center">
+                <div className="relative w-full max-w-xs">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-2/20 blur-2xl opacity-60" />
+                  <div className="relative rounded-2xl border border-border/80 overflow-hidden shadow-2xl shadow-accent/20 backdrop-blur-sm">
+                    <div className="relative aspect-[4/5]">
+                      <Image
+                        src="/Profile_image.png"
+                        alt="Profile image of Nishtha Lath"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
                   </div>
-                </Card>
+                </div>
               </div>
             </div>
           </div>
@@ -802,89 +824,78 @@ export default function Home() {
 
         <section id="about" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <SectionHeader
-              eyebrow={
-                tSection("about", { eyebrow: "About" }).eyebrow || "About"
-              }
-              title={
-                tSection("about", {
-                  title: "Engineering that holds up in real-world contexts",
-                }).title || "Engineering that holds up in real-world contexts"
-              }
-              subtitle={
-                tSection("about", {
-                  subtitle:
-                    "A concise snapshot of my background, focus areas, and academic foundation.",
-                }).subtitle
-              }
-            />
+            <h2 className="mb-8 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
+              {lang === "ko" ? "소개" : "About"}
+            </h2>
 
-            <div className="grid gap-8 md:grid-cols-12">
-              <div className="md:col-span-7">
-                <Card>
-                  <div className="space-y-4 text-base leading-7 text-muted">
-                    {(profileToRender.about || profile.about).map((p) => (
-                      <p key={p}>{p}</p>
-                    ))}
-                  </div>
-                </Card>
-              </div>
-
-              <div className="md:col-span-5">
-                <div className="space-y-6">
-                  <Card>
-                    <div className="text-sm font-medium text-muted">
-                      {lang === "ko" ? "학력" : "Academics"}
-                    </div>
-                    <div className="mt-3 text-sm text-foreground/90">
-                      {profileToRender.academics?.school ||
-                        profile.academics.school}
-                    </div>
-                    <div className="mt-2 text-sm text-muted">
-                      {profileToRender.academics?.gpa ||
-                        profile.academics.gpa}
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {(profileToRender.academics?.coursework ||
-                        profile.academics.coursework).map((c) => (
-                          <Tag key={c}>{c}</Tag>
-                        ))}
-                    </div>
-                  </Card>
-
-                  <Card>
-                    <div className="text-sm font-medium text-muted">
-                      {lang === "ko" ? "언어" : "Languages"}
-                    </div>
-                    <ul className="mt-3 space-y-2 text-sm text-foreground/90">
-                      {(profileToRender.languages || profile.languages).map(
-                        (l) => (
-                          <li key={l}>{l}</li>
-                        )
-                      )}
-                    </ul>
-                  </Card>
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card>
+                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                  {lang === "ko" ? "소개" : "Intro"}
                 </div>
-              </div>
+                <div className="space-y-3 text-sm leading-6 text-muted">
+                  {(profileToRender.about || profile.about).map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </Card>
+
+              <Card>
+                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                  {lang === "ko" ? "학력" : "Education"}
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="font-medium text-foreground">
+                    {profileToRender.education?.school || profile.education.school}
+                  </div>
+                  <div className="text-muted">
+                    {profileToRender.education?.degree || profile.education.degree}
+                  </div>
+                  <div className="mt-3 space-y-1 text-muted">
+                    <div>{profileToRender.education?.gpa || profile.education.gpa}</div>
+                    <div>{profileToRender.education?.recentGpa || profile.education.recentGpa}</div>
+                  </div>
+                  <div className="mt-3 text-muted">
+                    {profileToRender.education?.focus || profile.education.focus}
+                  </div>
+                </div>
+              </Card>
+
+              <Card>
+                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                  {lang === "ko" ? "소프트 스킬" : "Soft Skills"}
+                </div>
+                <ul className="space-y-2 text-sm text-muted">
+                  {(profileToRender.softSkills || profile.softSkills).map((skill) => (
+                    <li key={skill}>• {skill}</li>
+                  ))}
+                </ul>
+              </Card>
+
+              <Card>
+                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                  {lang === "ko" ? "언어" : "Languages"}
+                </div>
+                <ul className="space-y-2 text-sm text-muted">
+                  {(profileToRender.languages || profile.languages).map((l) => (
+                    <li key={l}>• {l}</li>
+                  ))}
+                </ul>
+              </Card>
             </div>
           </div>
         </section>
 
         <section id="skills" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <SectionHeader
-              eyebrow={tSection("skills", { eyebrow: "Skills" }).eyebrow || "Skills"}
-              title={
-                tSection("skills", {
-                  title: "A focused stack across AI, backend, and web UI",
-                }).title || "A focused stack across AI, backend, and web UI"
-              }
-              subtitle={
-                tSection("skills", {
-                  subtitle: "Grouped to keep signal high and reduce tool noise.",
-                }).subtitle
-              }
-            />
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "기술" : "Skills"}
+              </h2>
+              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
+                {lang === "ko" ? "AI·백엔드·웹 UI 핵심 스택" : "A focused stack across AI, backend, and web UI"}
+              </p>
+            </div>
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {skillsToRender.map((group) => (
@@ -908,23 +919,14 @@ export default function Home() {
 
         <section id="experience" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <SectionHeader
-              eyebrow={
-                tSection("experience", { eyebrow: "Experience" }).eyebrow ||
-                "Experience"
-              }
-              title={
-                tSection("experience", {
-                  title: "Internships and lab work with clear ownership",
-                }).title || "Internships and lab work with clear ownership"
-              }
-              subtitle={
-                tSection("experience", {
-                  subtitle:
-                    "Concise timeline entries highlighting what shipped and what I owned.",
-                }).subtitle
-              }
-            />
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "경력" : "Experience"}
+              </h2>
+              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
+                {lang === "ko" ? "인턴십 및 연구 경험" : "Professional & Research Experience"}
+              </p>
+            </div>
 
             <div className="space-y-5">
               {experienceToRender.map((item) => (
@@ -967,84 +969,40 @@ export default function Home() {
 
         <section id="projects" className="border-t border-border/60">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <SectionHeader
-              eyebrow={
-                tSection("projects", { eyebrow: "Projects" }).eyebrow || "Projects"
-              }
-              title={
-                tSection("projects", { title: "Case-study builds" }).title ||
-                "Case-study builds"
-              }
-              subtitle={
-                tSection("projects", {
-                  subtitle:
-                    "Compact case studies showing the problem, what I built, and the outcome.",
-                }).subtitle
-              }
-            />
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "프로젝트" : "Projects"}
+              </h2>
+              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
+                {lang === "ko" ? "연구와 실무를 통해 설계·구현한 AI 및 소프트웨어 프로젝트" : "AI and software projects designed and implemented through research and practical development"}
+              </p>
+            </div>
 
-            <div className="space-y-5">
-              {projectsToRender.map((p) => (
-                <Card key={p.title}>
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div>
-                      <div
-                        className="text-lg font-semibold tracking-tight text-foreground"
-                        style={{ fontFamily: "var(--font-geist-mono)" }}
-                      >
-                        {p.title}
-                      </div>
-                      <div className="mt-1 text-sm text-muted">{p.subtitle}</div>
-                    </div>
-                    <div className="text-sm font-medium text-muted">{p.role}</div>
-                  </div>
-
-                  <div className="mt-5 grid gap-6 lg:grid-cols-12">
-                    <div className="lg:col-span-7">
-                      <div className="text-sm font-medium text-muted">
-                        What I built
-                      </div>
-                      <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
-                        {p.whatBuilt.map((b) => (
-                          <li key={b}>• {b}</li>
-                        ))}
-                      </ul>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {projectCards.map((project) => (
+                <Card key={project.id}>
+                  <div className="h-full flex flex-col">
+                    {/* Card Title */}
+                    <div className="mb-3 flex-1">
+                      <h3 className="text-lg font-semibold tracking-tight text-foreground" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted">{project.shortDescription}</p>
                     </div>
 
-                    <div className="lg:col-span-5">
-                      <div className="text-sm font-medium text-muted">Stack</div>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {p.stack.map((s) => (
-                          <Tag key={s}>{s}</Tag>
-                        ))}
-                      </div>
-
-                      {p.outcomes && p.outcomes.length > 0 ? (
-                        <>
-                          <div className="mt-6 text-sm font-medium text-muted">
-                            Outcome
-                          </div>
-                          <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
-                            {p.outcomes.map((o) => (
-                              <li key={o}>• {o}</li>
-                            ))}
-                          </ul>
-                        </>
-                      ) : null}
-
-                      {p.repoLinks && p.repoLinks.length > 0 ? (
-                        <div className="mt-6 flex flex-wrap gap-3">
-                          {p.repoLinks.map((r) => (
-                            <LinkButton
-                              key={r.href}
-                              label={r.label}
-                              href={r.href}
-                              variant="secondary"
-                            />
-                          ))}
-                        </div>
-                      ) : null}
+                    {/* Tech Stack */}
+                    <div className="mb-4">
+                      <div className="text-xs font-medium text-muted mb-2">Tech Stack</div>
+                      <p className="text-xs text-muted">{project.techStack}</p>
                     </div>
+
+                    {/* Learn More Button */}
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-muted transition-colors mt-auto"
+                    >
+                      Learn more →
+                    </Link>
                   </div>
                 </Card>
               ))}
