@@ -41,17 +41,20 @@
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/NishthaLath/Portfolio.git
    cd Portfolio
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Run the development server:**
+
    ```bash
    npm run dev
    ```
@@ -175,6 +178,7 @@ The static export can be deployed to any static hosting service:
 ### Code Quality
 
 The project uses:
+
 - **ESLint** for code linting
 - **TypeScript** for type safety
 - **Next.js ESLint Config** for best practices
@@ -190,6 +194,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ## 👤 Author
 
 **Nishtha Lath**
+
 - GitHub: [@NishthaLath](https://github.com/NishthaLath)
 - LinkedIn: [nishtha-lath-335206276](https://www.linkedin.com/in/nishtha-lath-335206276/)
 

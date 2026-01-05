@@ -19,7 +19,7 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block rounded-full border border-border/60 bg-muted/40 px-3 py-1 text-xs font-medium text-muted">
+    <span className="inline-block rounded-full border border-border/60 bg-muted/40 px-3 py-1 text-xs font-medium">
       {children}
     </span>
   );
@@ -142,8 +142,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
             {/* Tech Stack Card */}
-            <Card>
-              <div className="text-sm font-medium text-muted mb-4">Tech Stack / Skills</div>
+            <Card className="!text-white">
+              <div className="text-sm font-medium mb-4">Tech Stack / Skills</div>
               <div className="flex flex-wrap gap-2">
                 {project.techStackFull.map((tech) => (
                   <Tag key={tech}>{tech}</Tag>
@@ -153,15 +153,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
             {/* Repository Card */}
             {project.repository && (
-              <Card>
-                <div className="text-sm font-medium text-muted mb-4">Repository</div>
+              <Card className="!text-white">
+                <div className="text-sm font-medium mb-4">Repository</div>
                 <LinkButton label="View on GitHub" href={project.repository} />
               </Card>
             )}
 
             {/* Navigation Card */}
-            <Card>
-              <div className="text-sm font-medium text-muted mb-4">Other Projects</div>
+            <Card className="!text-white">
+              <div className="text-sm font-medium mb-4">Other Projects</div>
               <div className="space-y-2">
                 {projectCards.map((card) => (
                   <Link
@@ -169,8 +169,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     href={card.id === project.id ? "#" : `/projects/${card.id}`}
                     className={`block text-sm p-2 rounded transition-colors ${
                       card.id === project.id
-                        ? "bg-muted/60 text-foreground font-medium"
-                        : "text-muted hover:bg-muted/40"
+                        ? "bg-muted/60 font-medium"
+                        : "hover:bg-muted/40"
                     }`}
                   >
                     {card.title}

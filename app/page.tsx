@@ -762,7 +762,7 @@ export default function Home() {
       </header>
 
       <main id="content">
-        <section id="top" className="relative overflow-hidden">
+        <section id="top" className="relative overflow-hidden min-h-screen flex flex-col">
           <div className="pointer-events-none absolute inset-0 opacity-60">
             <div className="absolute -top-30 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)]" />
           </div>
@@ -822,8 +822,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="about" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <h2 className="mb-8 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
               {lang === "ko" ? "소개" : "About"}
             </h2>
@@ -886,8 +886,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="skills" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="skills" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "기술" : "Skills"}
@@ -917,8 +917,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="experience" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "경력" : "Experience"}
@@ -967,8 +967,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="projects" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "프로젝트" : "Projects"}
@@ -1010,8 +1010,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="research" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="research" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={
                 tSection("research", { eyebrow: "Research" }).eyebrow || "Research"
@@ -1077,8 +1077,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="awards" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="awards" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={tSection("awards", { eyebrow: "Awards" }).eyebrow || "Awards"}
               title={
@@ -1133,8 +1133,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="leadership" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="leadership" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={
                 tSection("leadership", { eyebrow: "Leadership" }).eyebrow ||
@@ -1153,7 +1153,7 @@ export default function Home() {
               }
             />
 
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {leadershipToRender.map((l) => (
                 <Card key={l.title}>
                   <div
@@ -1171,8 +1171,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="border-t border-border/60">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <section id="contact" className="border-t border-border/60 min-h-screen flex flex-col">
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={
                 tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"

@@ -18,6 +18,7 @@ That's it! Your site will automatically deploy when you push to the `main` branc
 ## Viewing Your Site
 
 After the first deployment completes, your portfolio will be live at:
+
 ```
 https://<your-username>.github.io/Portfolio/
 ```
@@ -27,6 +28,7 @@ Replace `<your-username>` with your GitHub username.
 ## How It Works
 
 ### Automatic Deployment
+
 - Every push to the `main` branch triggers the deployment workflow
 - GitHub Actions:
   1. Checks out your code
@@ -35,7 +37,9 @@ Replace `<your-username>` with your GitHub username.
   4. Deploys to GitHub Pages
 
 ### Manual Deployment
+
 You can also trigger deployment manually:
+
 1. Go to the **Actions** tab in your repository
 2. Select **Deploy to GitHub Pages** workflow
 3. Click **Run workflow** button
@@ -44,12 +48,14 @@ You can also trigger deployment manually:
 ## Monitoring Deployments
 
 ### Check Deployment Status
+
 1. Go to the **Actions** tab in your repository
 2. Look for the latest workflow run
 3. Green checkmark = successful deployment
 4. Red X = failed deployment (click to see logs)
 
 ### View Deployment History
+
 - All deployments are listed in the **Actions** tab
 - Each workflow run shows:
   - Commit that triggered it
@@ -62,20 +68,25 @@ You can also trigger deployment manually:
 The deployment is configured in these files:
 
 ### `.github/workflows/deploy.yml`
+
 The GitHub Actions workflow that handles the build and deployment process.
 
 ### `next.config.ts`
+
 Next.js configuration with:
+
 - `output: 'export'` - Enables static site generation
 - `basePath: '/Portfolio'` - Configures routing for subdirectory hosting
 - `images.unoptimized: true` - Allows images in static export
 
 ### `package.json`
+
 Contains the build script that compiles the Next.js application.
 
 ## Troubleshooting
 
 ### Deployment fails
+
 1. Check the Actions tab for error messages
 2. Common issues:
    - Build errors: Check if `npm run build` works locally
@@ -83,11 +94,13 @@ Contains the build script that compiles the Next.js application.
    - Permissions: Verify the workflow has proper permissions
 
 ### Site not updating
+
 1. Check if the workflow ran successfully in Actions tab
 2. Clear your browser cache
 3. Wait a few minutes for GitHub CDN to update
 
 ### 404 errors
+
 1. Make sure GitHub Pages is set to use "GitHub Actions" as source
 2. Verify the basePath in `next.config.ts` matches your repository name
 3. Check that you're accessing the correct URL format
@@ -110,13 +123,17 @@ Note: When testing locally, the basePath won't work correctly since it's configu
 ## Customization
 
 ### Change Repository Name
+
 If you rename your repository:
+
 1. Update `basePath` in `next.config.ts` to match the new name
 2. Commit and push the change
 3. The workflow will automatically use the new repository name
 
 ### Custom Domain
+
 To use a custom domain:
+
 1. Add a `CNAME` file to the `public` directory with your domain
 2. Configure DNS settings with your domain provider
 3. Update GitHub Pages settings to use your custom domain
