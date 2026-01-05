@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 type LinkItem = {
   label: string;
@@ -47,7 +48,7 @@ const profile = {
     "TOPIK Level 5",
     "AI & web systems",
   ],
-  locationLine: "Daegu, South Korea",
+  locationLine: "Hello! I'm",
   links: {
     github: "https://github.com/NishthaLath",
     linkedin: "https://www.linkedin.com/in/nishtha-lath-335206276/",
@@ -84,7 +85,7 @@ const koProfile = {
   subheadline:
     "경북대학교 컴퓨터학부 심화컴퓨터공학전공 학부생(2022–2026). 연구 기반 개발과 실무 배포를 연결하는 작업을 수행합니다.",
   quickFacts: ["경북대학교 (KNU)", "TOPIK 5급", "AI · 웹 시스템"],
-  locationLine: "대구, 대한민국",
+  locationLine: "Hello! I'm",
   links: profile.links,
   about: [
     "저는 경북대학교 컴퓨터학부 심화컴퓨터공학전공에 재학 중인 학부생(2022–2026)으로, RAG 및 대화형 시스템과 같은 LLM 응용과 소프트웨어 엔지니어링을 결합한 개발을 수행하고 있습니다.",
@@ -582,9 +583,9 @@ function SectionHeader({
   );
 }
 
-function Card({ children }: { children: React.ReactNode }) {
+function Card({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className="rounded-2xl border border-border/80 bg-surface/60 p-6 shadow-lg shadow-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:border-border backdrop-blur-sm">
+    <div className={cx("rounded-2xl border border-border/80 bg-surface/60 p-6 shadow-lg shadow-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:border-border backdrop-blur-sm", className)}>
       {children}
     </div>
   );
@@ -750,7 +751,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
             <div className="grid gap-10 md:grid-cols-12 md:items-center">
               <div className="md:col-span-8">
-                <p className="text-sm font-medium text-muted">
+                <p className="text-lg font-semibold text-foreground">
                   {profileToRender.locationLine}
                 </p>
 
@@ -779,45 +780,20 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {profileToRender.quickFacts.map((f) => (
-                    <Tag key={f}>{f}</Tag>
-                  ))}
-                </div>
               </div>
 
               <div className="md:col-span-4">
-                <Card>
-                  <div className="text-sm font-medium text-muted">
-                    {lang === "ko" ? "주요 분야" : "Focus areas"}
+                <Card className="p-0 overflow-hidden">
+                  <div className="relative aspect-[4/5]">
+                    <Image
+                      src="/Profile_image.png"
+                      alt="Profile image of Nishtha Lath"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover"
+                      priority
+                    />
                   </div>
-                  <ul className="mt-4 space-y-2 text-sm text-foreground/90">
-                    <li>
-                      {lang === "ko"
-                        ? "AI 시스템 및 LLM 응용"
-                        : "AI systems and LLM applications"}
-                    </li>
-                    <li>
-                      {lang === "ko"
-                        ? "대화형 AI 및 RAG"
-                        : "Conversational AI and RAG"}
-                    </li>
-                    <li>
-                      {lang === "ko"
-                        ? "웹 및 백엔드 엔지니어링"
-                        : "Web and backend engineering"}
-                    </li>
-                    <li>
-                      {lang === "ko"
-                        ? "연구 기반 개발"
-                        : "Research-driven development"}
-                    </li>
-                    <li>
-                      {lang === "ko"
-                        ? "접근성 중심의 인간 중심 시스템"
-                        : "Accessible, human-centered systems"}
-                    </li>
-                  </ul>
                 </Card>
               </div>
             </div>
