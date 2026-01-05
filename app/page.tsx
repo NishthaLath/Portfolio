@@ -370,15 +370,15 @@ const research: ResearchItem[] = [
   {
     title: "Evaluating the LLaMA Model for Enhanced Conversational AI in Voice Recognition Kiosks",
     venue: "UCWIT 2024 (KIISE-hosted)",
-    award: "Excellent Paper Award (Top 4 / 47 teams)",
+    award: "Excellent Paper Award (Top 4/47 teams)",
     summaryBullets: [
       "Compared rule-based conversational systems (RASA) with LLaMA in realistic kiosk-style dialogue scenarios.",
       "Designed controlled test conversations and a task-based evaluation methodology.",
       "Observed stronger handling of ambiguity and multi-intent inputs with LLaMA.",
     ],
-    stack: ["LLaMA", "RASA", "Python", "NLP evaluation"],
+    stack: ["LLaMA", "RASA", "Python", "NLP evaResearchluation"],
     repoLinks: [
-      { label: "Paper Repo", href: "https://github.com/NishthaLath/UCWIT-2024-ResearchPaper" },
+      { label: " Github Paper Repo →", href: "https://github.com/NishthaLath/UCWIT-2024-ResearchPaper" },
     ],
   },
 ];
@@ -823,7 +823,7 @@ export default function Home() {
         </section>
 
         <section id="about" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <h2 className="mb-8 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
               {lang === "ko" ? "소개" : "About"}
             </h2>
@@ -887,7 +887,7 @@ export default function Home() {
         </section>
 
         <section id="skills" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "기술" : "Skills"}
@@ -918,7 +918,7 @@ export default function Home() {
         </section>
 
         <section id="experience" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "경력" : "Experience"}
@@ -968,7 +968,7 @@ export default function Home() {
         </section>
 
         <section id="projects" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 {lang === "ko" ? "프로젝트" : "Projects"}
@@ -1011,7 +1011,7 @@ export default function Home() {
         </section>
 
         <section id="research" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <SectionHeader
               eyebrow={
                 tSection("research", { eyebrow: "Research" }).eyebrow || "Research"
@@ -1042,7 +1042,7 @@ export default function Home() {
                       </div>
                       <div className="mt-1 text-sm text-muted">{r.venue}</div>
                     </div>
-                    <div className="inline-flex rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent-2/10 px-4 py-1.5 text-sm font-semibold text-foreground shadow-md shadow-accent/20 backdrop-blur-sm">
+                    <div className="inline-flex rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent-2/10 px-4 py-1.5 text-xs font-semibold text-foreground shadow-md shadow-accent/20 backdrop-blur-sm">
                       {r.award}
                     </div>
                   </div>
@@ -1078,7 +1078,7 @@ export default function Home() {
         </section>
 
         <section id="awards" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-16 pb-10 sm:px-8 sm:pt-16 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={tSection("awards", { eyebrow: "Awards" }).eyebrow || "Awards"}
               title={
@@ -1172,7 +1172,7 @@ export default function Home() {
         </section>
 
         <section id="contact" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+          <div className="mx-auto max-w-6xl px-5 pt-16 pb-10 sm:px-8 sm:pt-16 sm:pb-14 w-full">
             <SectionHeader
               eyebrow={
                 tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"
@@ -1209,7 +1209,7 @@ export default function Home() {
               </div>
             </Card>
 
-            <footer className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-border/60 pt-8 text-sm text-muted sm:flex-row sm:items-center">
+            <footer className="mt-25 flex flex-col items-start justify-between gap-4 border-t border-border/60 pt-8 text-sm text-muted sm:flex-row sm:items-center">
               <div>
                 © {mounted ? new Date().getFullYear() : CURRENT_YEAR}{" "}
                 {profileToRender.name}
