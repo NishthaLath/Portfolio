@@ -50,13 +50,14 @@ function LinkButton({ label, href, variant = "primary" }: { label: string; href:
 }
 
 interface ProjectDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  const project = projectDetails[params.id];
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const { id } = await params;
+  const project = projectDetails[id];
 
   if (!project) {
     return notFound();

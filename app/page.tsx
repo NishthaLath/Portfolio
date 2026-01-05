@@ -226,7 +226,7 @@ const koExperience: ExperienceItem[] = [
     title: "학부 연구실 인턴",
     org: "Intelligent Software Systems Lab",
     dates: "Oct 2025 – Dec 2025",
-    note: "이력서와 동일한 기간입니다. 연장될 경우 업데이트가 필요합니다.",
+    note: "",
     bullets: [
       "법령 매뉴얼, 인구 데이터셋, 지리공간 위험 데이터를 통합한 RAG 기반 재난 대응 어시스턴트를 개발했습니다.",
       "FAISS 기반 검색, LangChain 파이프라인, 이기종 입력을 처리하는 최적화된 FastAPI 백엔드를 구현했습니다.",
