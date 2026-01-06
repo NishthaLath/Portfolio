@@ -16,6 +16,7 @@ export interface ProjectDetailData extends ProjectCardData {
   techStackFull: string[];
   outcome: string[];
   repository?: string;
+  category: "AI" | "Full-Stack" | "Backend" | "Frontend";
 }
 
 export const projectCards: ProjectCardData[] = [

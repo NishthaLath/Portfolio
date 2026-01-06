@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+﻿/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
@@ -54,7 +54,7 @@ const profile = {
   links: {
     github: "https://github.com/NishthaLath",
     linkedin: "https://www.linkedin.com/in/nishtha-lath-335206276/",
-    email: "",
+    email: "lathnishtha775@gmail.com",
     resumeEn: "https://drive.google.com/file/d/1OTfZOcni_pwuJHin3wRD9-DwDqyCFwpb/view?usp=drive_link",
     resumeKo: "https://drive.google.com/file/d/10VST30cYUv_vhqYBp_Wz-EuZXED7arHb/view?usp=drive_link",
   },
@@ -447,38 +447,62 @@ const koResearch: ResearchItem[] = [
 const leadership = [
   {
     title: "International Student Representative (CS Department)",
-    detail: "Student support and coordination between students and the department.",
+    category: "🏛️ Governance",
+    dates: "2024–2026",
+    detail: "Coordinated student support initiatives and facilitated 10+ department-wide events for 50+ international students. Improved onboarding satisfaction through streamlined communication channels.",
+    isPrimary: true,
   },
   {
     title: "ISO Member",
-    detail: "Event organization and support for international students.",
+    category: "🎯 Community",
+    dates: "2023–2025",
+    detail: "Organized and executed 8+ cultural and social events for international student community. Built cross-cultural networks and mentorship programs.",
+    isPrimary: false,
   },
   {
-    title: "KERT Cybersecurity Club Member",
-    detail: "Participation in CTFs and foundational work in web security and cryptography.",
+    title: "KERT Cybersecurity Club",
+    category: "🛡️ Technical",
+    dates: "2024–Present",
+    detail: "Active in CTF competitions and web security research. Contributed foundational work in cryptography implementations and security architecture documentation.",
+    isPrimary: false,
   },
   {
-    title: "Dance & Debate Competitions",
-    detail: "Multiple awards; bilingual debating in Korean and English.",
+    title: "Dance & Debate",
+    category: "🎭 Competitive",
+    dates: "2022–2026",
+    detail: "Multiple competition awards including regional debate championships. Bilingual proficiency in Korean and English debate formats. Balanced competitive excellence with technical and leadership commitments.",
+    isPrimary: false,
   },
 ];
 
 const koLeadership = [
   {
     title: "국제 학생 대표 (컴퓨터공학과)",
-    detail: "국제 학생 지원 및 학과와의 소통을 담당했습니다.",
+    category: "🏛️ 학과 운영",
+    dates: "2024–2026",
+    detail: "50명 이상의 국제 학생을 위해 10회 이상의 학과 행사를 조직 및 운영. 소통 체계를 개선하여 국제 학생의 만족도를 향상시켰습니다.",
+    isPrimary: true,
   },
   {
     title: "ISO 회원",
-    detail: "행사 기획 및 국제 학생 지원 활동에 참여했습니다.",
+    category: "🎯 커뮤니티",
+    dates: "2023–2025",
+    detail: "국제 학생 커뮤니티를 위해 8회 이상의 문화·사교 행사 기획 및 실행. 다문화 네트워크와 멘토십 프로그램을 구축했습니다.",
+    isPrimary: false,
   },
   {
-    title: "KERT 사이버보안 동아리 회원",
-    detail: "CTF 참여와 웹 보안, 암호학 기초 학습을 진행했습니다.",
+    title: "KERT 사이버보안 동아리",
+    category: "🛡️ 기술",
+    dates: "2024–현재",
+    detail: "CTF 대회 및 웹 보안 연구에 적극 참여. 암호학 구현 및 보안 아키텍처 문서화에 기여했습니다.",
+    isPrimary: false,
   },
   {
-    title: "댄스 및 토론 대회",
-    detail: "다수 수상 경력 보유 · 한국어·영어 이중 언어 토론.",
+    title: "댄스 및 토론",
+    category: "🎭 대회",
+    dates: "2022–2026",
+    detail: "지역 토론 대회를 포함한 여러 대회에서 수상. 한국어·영어 이중 언어 토론 능력 보유. 기술 및 리더십 활동과 병행하며 대회 경험을 쌓았습니다.",
+    isPrimary: false,
   },
 ];
 
@@ -722,6 +746,8 @@ export default function Home() {
   // Stable default for SSR; hydrate preference after mount.
   const [lang, setLang] = useState<"en" | "ko">("en");
   const [mounted, setMounted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -744,6 +770,32 @@ export default function Home() {
     } catch (e) { }
     document.documentElement.lang = lang === "ko" ? "ko" : "en";
   }, [lang, mounted]);
+
+  // Track scroll progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.scrollY;
+      const progress = (scrolled / documentHeight) * 100;
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when clicking outside or navigating
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   const githubEnabled = Boolean(profile.links.github);
   const linkedinEnabled = Boolean(profile.links.linkedin);
@@ -771,7 +823,13 @@ export default function Home() {
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-xl shadow-sm">
+      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur-xl shadow-sm">
+        {/* Scroll progress bar */}
+        <div 
+          className="absolute top-0 left-0 h-0.5 bg-gradient-to-r from-accent to-accent-2 transition-all duration-150"
+          style={{ width: `${scrollProgress}%` }}
+        />
+        
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
           <a
             href="#top"
@@ -781,6 +839,7 @@ export default function Home() {
             {profile.name}
           </a>
 
+          {/* Desktop Navigation */}
           <nav className="hidden items-center gap-5 text-sm text-muted md:flex">
             {navToRender.map((item) => (
               <a
@@ -793,36 +852,100 @@ export default function Home() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
-            {githubEnabled ? (
-              <a
-                href={profile.links.github}
-                className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-            ) : null}
-            {linkedinEnabled ? (
-              <a
-                href={profile.links.linkedin}
-                className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            ) : null}
+          <div className="flex items-center gap-3">
+            {/* Social links - hidden on small mobile */}
+            <div className="hidden sm:flex items-center gap-3">
+              {githubEnabled ? (
+                <a
+                  href={profile.links.github}
+                  className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              ) : null}
+              {linkedinEnabled ? (
+                <a
+                  href={profile.links.linkedin}
+                  className="text-sm font-medium text-muted transition-all hover:text-foreground hover:scale-110"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              ) : null}
+            </div>
+            
+            {/* Language toggle */}
             <button
               aria-label={lang === "ko" ? "영어로 전환" : "한국어로 전환"}
               onClick={() => setLang((s) => (s === "ko" ? "en" : "ko"))}
-              className="ml-2 rounded-full border border-border/80 bg-surface/60 px-3 py-1 text-sm font-medium text-muted hover:text-foreground cursor-pointer"
+              className="rounded-full border border-border/80 bg-surface/60 px-3 py-1 text-sm font-medium text-muted hover:text-foreground hover:bg-surface-2 transition-all cursor-pointer"
             >
-              {lang === "ko" ? "English" : "한국어"}
+              {lang === "ko" ? "EN" : "한국어"}
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              aria-label="Toggle menu"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-muted hover:text-foreground transition-colors"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
+
+        {/* Mobile menu overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-[57px] bg-background/98 backdrop-blur-xl z-50 animate-fadeIn">
+            <nav className="flex flex-col px-5 py-6 space-y-1">
+              {navToRender.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-base font-medium text-muted hover:text-foreground py-3 px-4 rounded-lg hover:bg-surface/60 transition-all"
+                >
+                  {item.label}
+                </a>
+              ))}
+              
+              {/* Social links in mobile menu */}
+              <div className="pt-6 mt-6 border-t border-border/60 flex gap-4">
+                {githubEnabled ? (
+                  <a
+                    href={profile.links.github}
+                    className="flex-1 text-center py-2 px-4 rounded-lg border border-border/80 bg-surface/60 text-sm font-medium text-muted hover:text-foreground hover:bg-surface-2 transition-all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                ) : null}
+                {linkedinEnabled ? (
+                  <a
+                    href={profile.links.linkedin}
+                    className="flex-1 text-center py-2 px-4 rounded-lg border border-border/80 bg-surface/60 text-sm font-medium text-muted hover:text-foreground hover:bg-surface-2 transition-all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                ) : null}
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main id="content">
@@ -900,63 +1023,116 @@ export default function Home() {
         </section>
 
         <section id="about" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
-            <h2 className="mb-8 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
-              {lang === "ko" ? "소개" : "About"}
-            </h2>
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+            <SectionHeader
+              eyebrow={tSection("about", { eyebrow: "Introduction" }).eyebrow || "Introduction"}
+              title={tSection("about", { title: "Who I Am" }).title || "Who I Am"}
+              subtitle={tSection("about", { subtitle: "Computer Science student at KNU focused on AI systems research and real-world deployment" }).subtitle || "Computer Science student at KNU focused on AI systems research and real-world deployment"}
+            />
 
-            <div className="grid gap-6 md:grid-cols-2">
-              <Card>
-                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                  {lang === "ko" ? "소개" : "Intro"}
-                </div>
-                <div className="space-y-3 text-sm leading-6 text-muted">
-                  {(profileToRender.about || profile.about).map((p) => (
-                    <p key={p}>{p}</p>
-                  ))}
-                </div>
-              </Card>
+            {/* Full-width prominent About intro */}
+            <div className="mb-8 border-l-4 border-accent pl-6 py-4 bg-surface/40 rounded-r-lg">
+              <div className="text-lg font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "누가 나인가" : "Who I Am"}
+              </div>
+              <div className="space-y-3 text-sm leading-7 text-muted">
+                {(profileToRender.about || profile.about).map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+            </div>
 
+            {/* 3-column layout: Education | Soft Skills | Languages */}
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Education Card */}
               <Card>
-                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   {lang === "ko" ? "학력" : "Education"}
                 </div>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-3 text-sm">
                   <div className="font-medium text-foreground">
                     {profileToRender.education?.school || profile.education.school}
                   </div>
                   <div className="text-muted">
                     {profileToRender.education?.degree || profile.education.degree}
                   </div>
-                  <div className="mt-3 space-y-1 text-muted">
-                    <div>{profileToRender.education?.gpa || profile.education.gpa}</div>
-                    <div>{profileToRender.education?.recentGpa || profile.education.recentGpa}</div>
+                  
+                  {/* GPA Progress Bar */}
+                  <div className="mt-4 space-y-2">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-muted">{profileToRender.education?.gpa || profile.education.gpa}</span>
+                      <span className="text-muted">4.3</span>
+                    </div>
+                    <div className="w-full bg-surface rounded-full h-2 overflow-hidden border border-border/30">
+                      <div className="bg-accent h-full rounded-full" style={{ width: "82.5%" }} />
+                    </div>
                   </div>
-                  <div className="mt-3 text-muted">
-                    {profileToRender.education?.focus || profile.education.focus}
+
+                  {/* Recent GPA Highlighted */}
+                  <div className="mt-4 p-3 rounded-lg bg-accent/10 border border-accent/30">
+                    <div className="text-xs text-accent font-semibold">
+                      {lang === "ko" ? "최근 학기" : "Recent GPA"}
+                    </div>
+                    <div className="text-accent font-semibold text-sm mt-1">
+                      {profileToRender.education?.recentGpa || profile.education.recentGpa}
+                    </div>
+                    <div className="text-xs text-accent/70 mt-2">
+                      {lang === "ko" ? "📈 상승 추세" : "📈 Upward Trend"}
+                    </div>
+                  </div>
+
+                  {/* Focus Areas with Icons */}
+                  <div className="mt-4 text-muted text-xs">
+                    <div className="font-semibold text-foreground mb-2">
+                      {lang === "ko" ? "관심 분야" : "Focus Areas"}
+                    </div>
+                    <div className="space-y-1">
+                      <div>🤖 {lang === "ko" ? "AI 시스템" : "AI Systems"}</div>
+                      <div>💻 {lang === "ko" ? "소프트웨어 공학" : "Software Engineering"}</div>
+                      <div>🔌 {lang === "ko" ? "시스템·네트워크" : "Systems & Networks"}</div>
+                    </div>
                   </div>
                 </div>
               </Card>
 
+              {/* Soft Skills Card with Badges */}
               <Card>
-                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   {lang === "ko" ? "소프트 스킬" : "Soft Skills"}
                 </div>
-                <ul className="space-y-2 text-sm text-muted">
-                  {(profileToRender.softSkills || profile.softSkills).map((skill) => (
-                    <li key={skill}>• {skill}</li>
-                  ))}
-                </ul>
+                <div className="space-y-2 text-sm">
+                  {(profileToRender.softSkills || profile.softSkills).map((skill, idx) => {
+                    const categoryColors = [
+                      "bg-accent/20 text-accent border border-accent/40",
+                      "bg-accent-2/20 text-accent-2 border border-accent-2/40",
+                      "bg-purple-500/20 text-purple-400 border border-purple-500/40",
+                      "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40",
+                      "bg-blue-500/20 text-blue-400 border border-blue-500/40",
+                    ];
+                    return (
+                      <div key={skill} className={`inline-block px-3 py-1.5 rounded-full text-xs font-medium ${categoryColors[idx % categoryColors.length]}`}>
+                        {skill}
+                      </div>
+                    );
+                  })}
+                </div>
               </Card>
 
+              {/* Languages Card */}
               <Card>
-                <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   {lang === "ko" ? "언어" : "Languages"}
                 </div>
-                <ul className="space-y-2 text-sm text-muted">
-                  {(profileToRender.languages || profile.languages).map((l) => (
-                    <li key={l}>• {l}</li>
-                  ))}
+                <ul className="space-y-3 text-sm">
+                  {(profileToRender.languages || profile.languages).map((l) => {
+                    const isPrimary = l.includes("Fluent") || l.includes("Native") || l.includes("유창") || l.includes("모국어");
+                    return (
+                      <li key={l} className={`flex items-start ${isPrimary ? "text-foreground font-medium" : "text-muted"}`}>
+                        <span className="mr-2">{isPrimary ? "⭐" : "•"}</span>
+                        {l}
+                      </li>
+                    );
+                  })}
                 </ul>
               </Card>
             </div>
@@ -964,15 +1140,12 @@ export default function Home() {
         </section>
 
         <section id="skills" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                {lang === "ko" ? "기술" : "Skills"}
-              </h2>
-              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
-                {lang === "ko" ? "AI·백엔드·웹 UI 핵심 스택" : "A focused stack across AI, backend, and web UI"}
-              </p>
-            </div>
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+            <SectionHeader
+              eyebrow={tSection("skills", { eyebrow: "Technical Expertise" }).eyebrow || "Technical Expertise"}
+              title={tSection("skills", { title: "Core Technical Stack" }).title || "Core Technical Stack"}
+              subtitle={tSection("skills", { subtitle: "Specialized in AI, backend systems, and full-stack development" }).subtitle || "Specialized in AI, backend systems, and full-stack development"}
+            />
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {skillsToRender.map((group) => (
@@ -1007,15 +1180,12 @@ export default function Home() {
         </section>
 
         <section id="experience" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                {lang === "ko" ? "경력" : "Experience"}
-              </h2>
-              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
-                {lang === "ko" ? "인턴십 및 연구 경험" : "Professional & Research Experience"}
-              </p>
-            </div>
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+            <SectionHeader
+              eyebrow={tSection("experience", { eyebrow: "Professional Work" }).eyebrow || "Professional Work"}
+              title={tSection("experience", { title: "Internships & Research" }).title || "Internships & Research"}
+              subtitle={tSection("experience", { subtitle: "Hands-on experience building AI systems and leading teams" }).subtitle || "Hands-on experience building AI systems and leading teams"}
+            />
 
             <div className="relative space-y-8">
               {/* Timeline accent line */}
@@ -1071,15 +1241,12 @@ export default function Home() {
         </section>
 
         <section id="projects" className="border-t border-border/60 min-h-screen flex flex-col">
-          <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                {lang === "ko" ? "프로젝트" : "Projects"}
-              </h2>
-              <p className="mt-3 max-w-2xl text-lg leading-7 text-muted">
-                {lang === "ko" ? "연구와 실무를 통해 설계·구현한 AI 및 소프트웨어 프로젝트" : "AI and software projects designed and implemented through research and practical development"}
-              </p>
-            </div>
+          <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
+            <SectionHeader
+              eyebrow={tSection("projects", { eyebrow: "Projects" }).eyebrow || "Projects"}
+              title={tSection("projects", { title: "Team Work" }).title || "Team Work"}
+              subtitle={tSection("projects", { subtitle: "AI and software projects designed and implemented through research and practical development" }).subtitle || "AI and software projects designed and implemented through research and practical development"}
+            />
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {projectCards.map((project) => (
@@ -1140,20 +1307,9 @@ export default function Home() {
         <section id="research" className="border-t border-border/60 min-h-screen flex flex-col">
           <div className="mx-auto max-w-6xl px-5 pt-2 pb-4 sm:px-8 sm:pt-4 sm:pb-4 w-full">
             <SectionHeader
-              eyebrow={
-                tSection("research", { eyebrow: "Research" }).eyebrow || "Research"
-              }
-              title={
-                tSection("research", {
-                  title: "Publication and evaluation work",
-                }).title || "Publication and evaluation work"
-              }
-              subtitle={
-                tSection("research", {
-                  subtitle:
-                    "Research on conversational AI behavior in realistic kiosk environments.",
-                }).subtitle
-              }
+              eyebrow={tSection("research", { eyebrow: "Research" }).eyebrow || "Research"}
+              title={tSection("research", { title: "Publication & Evaluation" }).title || "Publication & Evaluation"}
+              subtitle={tSection("research", { subtitle: "Research on conversational AI behavior in realistic environments" }).subtitle || "Research on conversational AI behavior in realistic environments"}
             />
 
             {/* Published Research - Premium Styling */}
@@ -1232,15 +1388,9 @@ export default function Home() {
         <section id="awards" className="border-t border-border/60 min-h-screen flex flex-col">
           <div className="mx-auto max-w-6xl px-5 pt-16 pb-10 sm:px-8 sm:pt-16 sm:pb-14 w-full">
             <SectionHeader
-              eyebrow={tSection("awards", { eyebrow: "Awards" }).eyebrow || "Awards"}
-              title={
-                tSection("awards", { title: "Recognitions" }).title || "Recognitions"
-              }
-              subtitle={
-                tSection("awards", {
-                  subtitle: "Awards and recognition from research and competitions.",
-                }).subtitle
-              }
+              eyebrow={tSection("awards", { eyebrow: "Recognition" }).eyebrow || "Recognition"}
+              title={tSection("awards", { title: "Honors & Awards" }).title || "Honors & Awards"}
+              subtitle={tSection("awards", { subtitle: "Awards and recognition from research and competitions" }).subtitle || "Awards and recognition from research and competitions"}
             />
 
             <div className="grid gap-5 md:grid-cols-2">
@@ -1315,16 +1465,37 @@ export default function Home() {
               }
             />
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {leadershipToRender.map((l) => (
-                <Card key={l.title}>
+            <div className="space-y-6">
+              {leadershipToRender.map((l, idx) => (
+                <Card
+                  key={l.title}
+                  className={l.isPrimary ? "border-2 border-accent/50 bg-gradient-to-br from-surface/60 to-accent/5 shadow-lg shadow-accent/10" : ""}
+                >
+                  {/* Role Tier Badge */}
+                  {l.isPrimary && (
+                    <div className="mb-4 inline-block px-3 py-1.5 rounded-full bg-accent/20 text-accent border border-accent/40 text-xs font-semibold">
+                      {lang === "ko" ? "🌟 주요 역할" : "🌟 Primary Role"}
+                    </div>
+                  )}
+
+                  {/* Category Badge */}
+                  <div className="mb-3 inline-block px-3 py-1.5 rounded-full bg-muted/20 text-muted border border-muted/40 text-xs font-medium">
+                    {l.category}
+                  </div>
+
                   <div
-                    className="text-base font-semibold tracking-tight text-foreground"
+                    className="text-base font-semibold tracking-tight text-foreground mb-2"
                     style={{ fontFamily: "var(--font-geist-mono)" }}
                   >
                     {l.title}
                   </div>
-                  <div className="mt-3 text-sm leading-6 text-muted">
+
+                  {/* Duration/Dates */}
+                  <div className="text-xs text-accent-2 font-medium mb-3">
+                    📅 {l.dates}
+                  </div>
+
+                  <div className="mt-4 text-sm leading-6 text-muted">
                     {l.detail}
                   </div>
                 </Card>
@@ -1336,40 +1507,180 @@ export default function Home() {
         <section id="contact" className="border-t border-border/60 min-h-screen flex flex-col">
           <div className="mx-auto max-w-6xl px-5 pt-16 pb-10 sm:px-8 sm:pt-16 sm:pb-14 w-full">
             <SectionHeader
-              eyebrow={
-                tSection("contact", { eyebrow: "Contact" }).eyebrow || "Contact"
-              }
+              eyebrow={tSection("contact", { eyebrow: "Get in Touch" }).eyebrow || "Get in Touch"}
               title={
-                tSection("contact", { title: "Let’s connect" }).title ||
-                "Let’s connect"
+                tSection("contact", { title: "Let's Build Together" }).title ||
+                "Let's Build Together"
               }
               subtitle={
                 tSection("contact", {
                   subtitle:
-                    "For internships, research, or engineering roles across AI systems, RAG, and full-stack development.",
+                    "Whether you're exploring RAG pipelines, LLM optimization, or full-stack solutions—let's connect",
                 }).subtitle
               }
             />
 
-            <Card>
-              <div className="flex flex-wrap gap-4">
-                {githubEnabled ? (
-                  <LinkButton
-                    label="GitHub"
-                    href={profile.links.github}
-                    variant="primary"
-                  />
-                ) : null}
+            {/* Email Contact Card - Primary */}
+            <div className="mb-8">
+              <Card className="bg-gradient-to-br from-accent/10 to-accent-2/5 border-accent/40">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold text-foreground mb-2" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                      {lang === "ko" ? "📧 직접 연락" : "📧 Direct Contact"}
+                    </div>
+                    <div className="text-lg font-medium text-accent">{profile.links.email}</div>
+                    <div className="text-xs text-muted mt-2">
+                      {lang === "ko" ? "일반적으로 24시간 이내 답변" : "Typically respond within 24 hours"}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(profile.links.email);
+                      alert(lang === "ko" ? "이메일이 복사되었습니다!" : "Email copied!");
+                    }}
+                    className="px-4 py-2 rounded-lg bg-accent text-surface font-medium text-sm hover:bg-accent/90 transition-colors whitespace-nowrap"
+                  >
+                    {lang === "ko" ? "복사" : "Copy"}
+                  </button>
+                </div>
+              </Card>
+            </div>
 
-                {linkedinEnabled ? (
-                  <LinkButton
-                    label="LinkedIn"
-                    href={profile.links.linkedin}
-                    variant="secondary"
-                  />
-                ) : null}
+            {/* CTAs for Different Personas */}
+            <div className="mb-8">
+              <h3 className="text-base font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "관심 분야별 연락처" : "Connect by Interest"}
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {/* Hiring Managers */}
+                <Card>
+                  <div className="text-sm font-semibold text-foreground mb-3">
+                    🚀 {lang === "ko" ? "채용 담당자" : "Hiring Managers"}
+                  </div>
+                  <p className="text-xs text-muted mb-4">
+                    {lang === "ko" ? "인턴십, 신입사원 채용, 풀스택 역할에 관심 있습니다." : "Open to internships, entry-level FT roles, and full-stack opportunities."}
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <LinkButton
+                      label={lang === "ko" ? "LinkedIn에서 메시지" : "Message on LinkedIn"}
+                      href={profile.links.linkedin}
+                      variant="primary"
+                    />
+                    <LinkButton
+                      label={lang === "ko" ? "이메일로 연락" : "Email Me"}
+                      href={`mailto:${profile.links.email}`}
+                      variant="secondary"
+                    />
+                  </div>
+                </Card>
+
+                {/* Developers/Collaborators */}
+                <Card>
+                  <div className="text-sm font-semibold text-foreground mb-3">
+                    🧑‍💻 {lang === "ko" ? "개발자·협력자" : "Developers"}
+                  </div>
+                  <p className="text-xs text-muted mb-4">
+                    {lang === "ko" ? "AI, RAG 파이프라인, 오픈소스 프로젝트 협업에 관심 있습니다." : "Open to RAG, AI, and open-source collaboration. Feel free to reach out!"}
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <LinkButton
+                      label={lang === "ko" ? "GitHub 보기" : "View GitHub"}
+                      href={profile.links.github}
+                      variant="primary"
+                    />
+                    <LinkButton
+                      label={lang === "ko" ? "이메일로 논의" : "Email to Discuss"}
+                      href={`mailto:${profile.links.email}`}
+                      variant="secondary"
+                    />
+                  </div>
+                </Card>
+
+                {/* Researchers/Academics */}
+                <Card>
+                  <div className="text-sm font-semibold text-foreground mb-3">
+                    📚 {lang === "ko" ? "연구자·학술" : "Researchers"}
+                  </div>
+                  <p className="text-xs text-muted mb-4">
+                    {lang === "ko" ? "LLM 평가, RAG 최적화 연구에 관심 있습니다." : "Interested in LLM evaluation and RAG optimization research."}
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <LinkButton
+                      label={lang === "ko" ? "연구 관심사" : "Research Interests"}
+                      href="#research"
+                      variant="primary"
+                    />
+                    <LinkButton
+                      label={lang === "ko" ? "직접 이메일" : "Email Directly"}
+                      href={`mailto:${profile.links.email}`}
+                      variant="secondary"
+                    />
+                  </div>
+                </Card>
               </div>
-            </Card>
+            </div>
+
+            {/* Resume Downloads */}
+            <div className="mb-8">
+              <h3 className="text-base font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "📄 이력서 다운로드" : "📄 Download Resume"}
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <LinkButton
+                  label={lang === "ko" ? "📄 한국어 이력서" : "📄 Resume (Korean)"}
+                  href={profile.links.resumeKo}
+                  variant="primary"
+                />
+                <LinkButton
+                  label={lang === "ko" ? "📄 영어 이력서" : "📄 Resume (English)"}
+                  href={profile.links.resumeEn}
+                  variant="primary"
+                />
+              </div>
+            </div>
+
+            {/* Trust Signals */}
+            <div className="mb-12">
+              <h3 className="text-base font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "💼 빠른 정보" : "💼 Quick Facts"}
+              </h3>
+              <Card className="bg-muted/5 border-border/40">
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-4 text-sm">
+                  <div>
+                    <div className="text-muted text-xs font-semibold mb-1">
+                      {lang === "ko" ? "⏱️ 답변 시간" : "⏱️ Response Time"}
+                    </div>
+                    <div className="text-foreground font-medium">
+                      {lang === "ko" ? "24시간 이내" : "Within 24 hours"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted text-xs font-semibold mb-1">
+                      {lang === "ko" ? "📍 위치" : "📍 Location"}
+                    </div>
+                    <div className="text-foreground font-medium">
+                      {lang === "ko" ? "대구, 한국" : "Daegu, Korea"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted text-xs font-semibold mb-1">
+                      {lang === "ko" ? "🕐 시간대" : "🕐 Timezone"}
+                    </div>
+                    <div className="text-foreground font-medium">
+                      {lang === "ko" ? "UTC+9" : "UTC+9 (KST)"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted text-xs font-semibold mb-1">
+                      {lang === "ko" ? "✅ 가능 상태" : "✅ Availability"}
+                    </div>
+                    <div className="text-foreground font-medium">
+                      {lang === "ko" ? "유연함" : "Flexible"}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
 
             <footer className="mt-25 flex flex-col items-start justify-between gap-4 border-t border-border/60 pt-8 text-sm text-muted sm:flex-row sm:items-center">
               <div>
