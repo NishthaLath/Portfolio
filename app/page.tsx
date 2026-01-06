@@ -1,7 +1,7 @@
-﻿/* eslint-disable react-hooks/set-state-in-effect */
+﻿/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { projectCards } from "./projects/data";
@@ -1010,13 +1010,10 @@ export default function Home() {
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-2/20 blur-2xl opacity-60" />
                   <div className="relative rounded-2xl border border-border/80 overflow-hidden shadow-2xl shadow-accent/20 backdrop-blur-sm">
                     <div className="relative aspect-[4/5]">
-                      <Image
+                      <img
                         src="/Profile_image.png"
                         alt="Profile image of Nishtha Lath"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 320px"
-                        className="object-cover"
-                        priority
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
