@@ -389,6 +389,44 @@ const research: ResearchItem[] = [
   },
 ];
 
+const researchInterests = [
+  {
+    area: "RAG System Optimization",
+    focus: "Reducing hallucinations through retrieval quality and prompt engineering",
+  },
+  {
+    area: "LLM Fine-tuning & Evaluation",
+    focus: "Domain-specific model adaptation and comparative performance analysis",
+  },
+  {
+    area: "Conversational AI for Accessibility",
+    focus: "Voice-driven interfaces for underserved populations and inclusive design",
+  },
+  {
+    area: "Multi-modal AI Systems",
+    focus: "Integrating text, speech, and visual data for comprehensive AI applications",
+  },
+];
+
+const koResearchInterests = [
+  {
+    area: "RAG 시스템 최적화",
+    focus: "검색 품질 및 프롬프트 엔지니어링을 통한 환각 감소",
+  },
+  {
+    area: "LLM 파인튜닝 및 평가",
+    focus: "도메인 특화 모델 적응 및 비교 성능 분석",
+  },
+  {
+    area: "접근성을 위한 대화형 AI",
+    focus: "소외 계층을 위한 음성 기반 인터페이스 및 포용적 디자인",
+  },
+  {
+    area: "멀티모달 AI 시스템",
+    focus: "텍스트, 음성, 시각 데이터 통합을 통한 종합 AI 응용",
+  },
+];
+
 const koResearch: ResearchItem[] = [
   {
     title: "음성 인식 키오스크 환경에서 대화형 AI 성능 향상을 위한 LLaMA 모델 평가",
@@ -614,7 +652,21 @@ function SectionHeader({
   );
 }
 
-function Card({ children, className }: { children: React.ReactNode; className?: string }) {
+function Card({ children, className, premium }: { children: React.ReactNode; className?: string; premium?: boolean }) {
+  if (premium) {
+    return (
+      <div className={cx(
+        "rounded-2xl border-2 p-6 shadow-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl backdrop-blur-sm",
+        "bg-gradient-to-br from-amber-500/5 via-surface/60 to-accent/5",
+        "border-amber-500/30 hover:border-amber-500/50",
+        "shadow-amber-500/10 hover:shadow-amber-500/20",
+        className
+      )}>
+        {children}
+      </div>
+    );
+  }
+  
   return (
     <div className={cx("rounded-2xl border border-border/80 bg-surface/60 p-6 shadow-lg shadow-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 hover:border-border backdrop-blur-sm", className)}>
       {children}
@@ -965,40 +1017,54 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="space-y-5">
-              {experienceToRender.map((item) => (
-                <Card key={`${item.org}-${item.title}`}>
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div>
-                      <div
-                        className="text-lg font-semibold tracking-tight text-foreground"
-                        style={{ fontFamily: "var(--font-geist-mono)" }}
-                      >
-                        {item.title}
+            <div className="relative space-y-8">
+              {/* Timeline accent line */}
+              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent-2 to-transparent hidden md:block" />
+              
+              {experienceToRender.map((item, index) => (
+                <div key={`${item.org}-${item.title}`} className="relative">
+                  {/* Timeline marker */}
+                  <div className="absolute -left-2 top-6 w-4 h-4 rounded-full bg-accent border-2 border-background shadow-lg shadow-accent/50 hidden md:block" />
+                  
+                  <Card className="md:ml-8">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <div>
+                        <div
+                          className="text-lg font-semibold tracking-tight text-foreground"
+                          style={{ fontFamily: "var(--font-geist-mono)" }}
+                        >
+                          {item.title}
+                        </div>
+                        <div className="mt-1 text-sm text-muted">{item.org}</div>
                       </div>
-                      <div className="mt-1 text-sm text-muted">{item.org}</div>
+                      <div className="text-sm font-medium text-accent-2">
+                        {item.dates}
+                      </div>
                     </div>
-                    <div className="text-sm font-medium text-muted">
-                      {item.dates}
+
+                    {item.note ? (
+                      <div className="mt-3 text-sm text-muted">⚠ {item.note}</div>
+                    ) : null}
+
+                    <ul className="mt-4 space-y-2 text-sm leading-6 text-muted">
+                      {item.bullets.map((b, bIndex) => {
+                        // Highlight key achievement bullets
+                        const isHighlight = b.includes("Deployed") || b.includes("Production") || b.includes("AWS") || b.includes("Reduced") || b.includes("Led") || b.includes("배포") || b.includes("운영") || b.includes("리드");
+                        return (
+                          <li key={bIndex} className={isHighlight ? "border-l-2 border-accent/50 pl-3" : ""}>
+                            • {b}
+                          </li>
+                        );
+                      })}
+                    </ul>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {item.stack.map((s) => (
+                        <Tag key={s}>{s}</Tag>
+                      ))}
                     </div>
-                  </div>
-
-                  {item.note ? (
-                    <div className="mt-3 text-sm text-muted">⚠ {item.note}</div>
-                  ) : null}
-
-                  <ul className="mt-4 space-y-2 text-sm leading-6 text-muted">
-                    {item.bullets.map((b) => (
-                      <li key={b}>• {b}</li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {item.stack.map((s) => (
-                      <Tag key={s}>{s}</Tag>
-                    ))}
-                  </div>
-                </Card>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -1090,50 +1156,75 @@ export default function Home() {
               }
             />
 
-            <div className="space-y-5">
-              {researchToRender.map((r) => (
-                <Card key={r.title}>
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <div
-                        className="text-lg font-semibold tracking-tight text-foreground"
-                        style={{ fontFamily: "var(--font-geist-mono)" }}
-                      >
-                        {r.title}
+            {/* Published Research - Premium Styling */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-amber-500/90 mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "🏆 출판된 연구" : "🏆 Published Research"}
+              </h3>
+              <div className="space-y-5">
+                {researchToRender.map((r) => (
+                  <Card key={r.title} premium>
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <div
+                          className="text-lg font-semibold tracking-tight text-foreground"
+                          style={{ fontFamily: "var(--font-geist-mono)" }}
+                        >
+                          {r.title}
+                        </div>
+                        <div className="mt-1 text-sm text-muted">{r.venue}</div>
                       </div>
-                      <div className="mt-1 text-sm text-muted">{r.venue}</div>
+                      <div className="inline-flex rounded-full border-2 border-amber-500/50 bg-gradient-to-r from-amber-500/15 to-amber-600/15 px-4 py-1.5 text-xs font-semibold text-amber-500 shadow-md shadow-amber-500/20 backdrop-blur-sm">
+                        {r.award}
+                      </div>
                     </div>
-                    <div className="inline-flex rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent-2/10 px-4 py-1.5 text-xs font-semibold text-foreground shadow-md shadow-accent/20 backdrop-blur-sm">
-                      {r.award}
-                    </div>
-                  </div>
 
-                  <ul className="mt-5 space-y-2 text-sm leading-6 text-muted">
-                    {r.summaryBullets.map((b) => (
-                      <li key={b}>• {b}</li>
-                    ))}
-                  </ul>
+                    <ul className="mt-5 space-y-2 text-sm leading-6 text-muted">
+                      {r.summaryBullets.map((b) => (
+                        <li key={b}>• {b}</li>
+                      ))}
+                    </ul>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {r.stack.map((s) => (
-                      <Tag key={s}>{s}</Tag>
-                    ))}
-                  </div>
-
-                  {r.repoLinks && r.repoLinks.length > 0 ? (
-                    <div className="mt-5 flex flex-wrap gap-3">
-                      {r.repoLinks.map((rl) => (
-                        <LinkButton
-                          key={rl.href}
-                          label={rl.label}
-                          href={rl.href}
-                          variant="secondary"
-                        />
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {r.stack.map((s) => (
+                        <Tag key={s}>{s}</Tag>
                       ))}
                     </div>
-                  ) : null}
-                </Card>
-              ))}
+
+                    {r.repoLinks && r.repoLinks.length > 0 ? (
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        {r.repoLinks.map((rl) => (
+                          <LinkButton
+                            key={rl.href}
+                            label={rl.label}
+                            href={rl.href}
+                            variant="secondary"
+                          />
+                        ))}
+                      </div>
+                    ) : null}
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Research Interests */}
+            <div>
+              <h3 className="text-sm font-semibold text-muted mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                {lang === "ko" ? "🔬 연구 관심사" : "🔬 Research Interests"}
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {(lang === "ko" ? koResearchInterests : researchInterests).map((interest) => (
+                  <Card key={interest.area}>
+                    <div className="text-sm font-semibold text-foreground mb-2" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                      {interest.area}
+                    </div>
+                    <p className="text-sm text-muted leading-relaxed">
+                      {interest.focus}
+                    </p>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -1153,41 +1244,51 @@ export default function Home() {
             />
 
             <div className="grid gap-5 md:grid-cols-2">
-              <Card>
-                <div
-                  className="text-base font-semibold tracking-tight text-foreground"
-                  style={{ fontFamily: "var(--font-geist-mono)" }}
-                >
-                  {lang === "ko" ? "우수 논문상" : "Excellent Paper Award"}
-                </div>
-                <div className="mt-2 text-sm text-muted">
-                  {lang === "ko"
-                    ? "UCWIT 2024 (KIISE 주최) — 47팀 중 Top 4"
-                    : "UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams"}
-                </div>
-                <div className="mt-4 text-sm leading-6 text-muted">
-                  {lang === "ko"
-                    ? "음성 인식 키오스크 시나리오에서 LLaMA와 규칙 기반 대화 시스템을 비교한 연구로 수상."
-                    : "Awarded for research comparing LLaMA with rule-based dialogue systems in voice-recognition kiosk scenarios."}
+              <Card premium>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🏆</span>
+                  <div>
+                    <div
+                      className="text-base font-semibold tracking-tight text-foreground"
+                      style={{ fontFamily: "var(--font-geist-mono)" }}
+                    >
+                      {lang === "ko" ? "우수 논문상" : "Excellent Paper Award"}
+                    </div>
+                    <div className="mt-2 text-sm font-medium text-amber-500">
+                      {lang === "ko"
+                        ? "UCWIT 2024 (KIISE 주최) — 47팀 중 Top 4"
+                        : "UCWIT 2024 (KIISE-hosted) — Top 4 / 47 teams"}
+                    </div>
+                    <div className="mt-4 text-sm leading-6 text-muted">
+                      {lang === "ko"
+                        ? "음성 인식 키오스크 시나리오에서 LLaMA와 규칙 기반 대화 시스템을 비교한 연구로 수상."
+                        : "Awarded for research comparing LLaMA with rule-based dialogue systems in voice-recognition kiosk scenarios."}
+                    </div>
+                  </div>
                 </div>
               </Card>
 
               <Card>
-                <div
-                  className="text-base font-semibold tracking-tight text-foreground"
-                  style={{ fontFamily: "var(--font-geist-mono)" }}
-                >
-                  {lang === "ko" ? "댄스 및 토론" : "Dance & Debate"}
-                </div>
-                <div className="mt-2 text-sm text-muted">
-                  {lang === "ko"
-                    ? "다수 수상 · 이중언어 토론(한국어 · 영어)"
-                    : "Multiple awards · Bilingual debating (Korean & English)"}
-                </div>
-                <div className="mt-4 text-sm leading-6 text-muted">
-                  {lang === "ko"
-                    ? "기술 프로젝트와 리더십 활동과 병행하며 대회에 참여했습니다."
-                    : "Competitive participation alongside technical and leadership work."}
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🎭</span>
+                  <div>
+                    <div
+                      className="text-base font-semibold tracking-tight text-foreground"
+                      style={{ fontFamily: "var(--font-geist-mono)" }}
+                    >
+                      {lang === "ko" ? "댄스 및 토론" : "Dance & Debate"}
+                    </div>
+                    <div className="mt-2 text-sm text-muted">
+                      {lang === "ko"
+                        ? "다수 수상 · 이중언어 토론(한국어 · 영어)"
+                        : "Multiple awards · Bilingual debating (Korean & English)"}
+                    </div>
+                    <div className="mt-4 text-sm leading-6 text-muted">
+                      {lang === "ko"
+                        ? "기술 프로젝트와 리더십 활동과 병행하며 대회에 참여했습니다."
+                        : "Competitive participation alongside technical and leadership work."}
+                    </div>
+                  </div>
                 </div>
               </Card>
             </div>
