@@ -76,6 +76,8 @@ const profile = {
     "Team leadership & ownership",
     "Cross-cultural collaboration",
     "Fast learner in ambiguous environments",
+    "Systems thinking & architectural reasoning",
+    "Ownership under uncertainty",
   ],
   languages: [
     "English: Fluent",
@@ -111,6 +113,8 @@ const koProfile = {
     "리더십과 오너십",
     "다문화 협업 경험",
     "불확실한 환경에서의 빠른 학습 능력",
+    "시스템 사고 & 아키텍처 설계",
+    "불확실성 속의 오너십",
   ],
   languages: [
     "영어: 유창",
@@ -1054,36 +1058,63 @@ export default function Home() {
                     {profileToRender.education?.degree || profile.education.degree}
                   </div>
                   
-                  {/* Simplified GPA - Progress Bar Only */}
+                  {/* GPA - Current & Past Semester */}
                   <div className="mt-4 space-y-2">
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-muted">{profileToRender.education?.gpa || profile.education.gpa}</span>
-                      <span className="text-muted">4.3</span>
+                    <div className="text-xs text-muted font-medium">
                     </div>
-                    <div className="w-full bg-surface rounded-full h-2 overflow-hidden border border-border/30">
-                      <div className="bg-accent h-full rounded-full" style={{ width: "82.5%" }} />
+                    <div className="flex items-center gap-4 text-sm">
+                      <div>
+                        <div className="text-xs text-muted">{lang === "ko" ? "현재 학기" : "Current"}</div>
+                        <div className="text-foreground font-semibold">{profileToRender.education?.recentGpa || profile.education.recentGpa}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted">{lang === "ko" ? "누적" : "Cumulative"}</div>
+                        <div className="text-accent font-semibold">{profileToRender.education?.gpa || profile.education.gpa}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </Card>
             </div>
 
-            {/* 3-column bottom section: Languages | Soft Skills | Focus Areas */}
+            {/* 3-column bottom section: Languages + Exploring | Soft Skills | Focus Areas */}
             <div className="grid gap-6 md:grid-cols-3">
-              {/* Languages Card */}
-              <Card>
-                <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                  {lang === "ko" ? "언어" : "Languages"}
-                </div>
-                <ul className="space-y-3 text-sm">
-                  {(profileToRender.languages || profile.languages).map((l) => (
-                    <li key={l} className="flex items-start text-foreground font-medium">
-                      <span className="mr-2">⭐</span>
-                      {l}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
+              {/* Left column: Languages (compact) + Currently Exploring */}
+              <div className="flex flex-col gap-6">
+                {/* Languages Card - Compact */}
+                <Card>
+                  <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                    {lang === "ko" ? "언어" : "Languages"}
+                  </div>
+                  <ul className="space-y-2 text-sm">
+                    {(profileToRender.languages || profile.languages).map((l) => (
+                      <li key={l} className="flex items-start text-foreground font-medium">
+                        <span className="mr-2">⭐</span>
+                        {l}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+
+                {/* Currently Exploring Card */}
+                <Card>
+                  <div className="text-sm font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                    {lang === "ko" ? "현재 탐구 중" : "Currently Exploring"}
+                  </div>
+                  <ul className="space-y-2 text-sm text-muted">
+                    {[
+                      lang === "ko" ? "고급 RAG 평가 전략" : "Advanced RAG evaluation strategies",
+                      lang === "ko" ? "LangGraph 기반 에이전트 라우팅" : "LangGraph-based agent routing",
+                      lang === "ko" ? "LLM 파이프라인 관찰성" : "System observability for LLM pipelines"
+                    ].map((item) => (
+                      <li key={item} className="flex items-start">
+                        <span className="mr-2">•</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
 
               {/* Soft Skills Card with Badges */}
               <Card>
@@ -1111,12 +1142,22 @@ export default function Home() {
               {/* Focus Areas Card */}
               <Card>
                 <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                  {lang === "ko" ? "관심 분야" : "Focus Areas"}
+                  {lang === "ko" ? "주요 관심 분야" : "Primary Focus"}
                 </div>
-                <div className="space-y-2 text-muted text-sm">
-                  <div>🤖 {lang === "ko" ? "AI 시스템" : "AI Systems"}</div>
-                  <div>💻 {lang === "ko" ? "소프트웨어 공학" : "Software Engineering"}</div>
-                  <div>🔌 {lang === "ko" ? "시스템·네트워크" : "Systems & Networks"}</div>
+                <div className="flex flex-wrap gap-2 text-sm">
+                  {[
+                    lang === "ko" ? "AI 시스템 & LLM 애플리케이션" : "AI Systems & LLM Applications",
+                    lang === "ko" ? "대화형 AI & RAG" : "Conversational AI & RAG",
+                    lang === "ko" ? "웹 & 백엔드 엔지니어링" : "Web & Backend Engineering",
+                    lang === "ko" ? "연구 중심 개발" : "Research-oriented Development",
+                    lang === "ko" ? "접근성 & 인간 중심 시스템" : "Accessible & Human-Centered Systems",
+                    lang === "ko" ? "평가 기반 AI 시스템" : "Evaluation-driven AI systems",
+                    lang === "ko" ? "프로덕션 준비 AI 인프라" : "Production-ready AI infrastructure"
+                  ].map((area) => (
+                    <div key={area} className="px-3 py-1.5 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/40">
+                      • {area}
+                    </div>
+                  ))}
                 </div>
               </Card>
             </div>
