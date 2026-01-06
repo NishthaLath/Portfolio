@@ -447,28 +447,28 @@ const koResearch: ResearchItem[] = [
 const leadership = [
   {
     title: "International Student Representative (CS Department)",
-    category: "🏛️ Governance",
+    category: "Student Council",
     dates: "2024–2026",
     detail: "Coordinated student support initiatives and facilitated 10+ department-wide events for 50+ international students. Improved onboarding satisfaction through streamlined communication channels.",
-    isPrimary: true,
+    isPrimary: false,
   },
   {
     title: "ISO Member",
-    category: "🎯 Community",
+    category: "Community",
     dates: "2023–2025",
     detail: "Organized and executed 8+ cultural and social events for international student community. Built cross-cultural networks and mentorship programs.",
     isPrimary: false,
   },
   {
     title: "KERT Cybersecurity Club",
-    category: "🛡️ Technical",
+    category: "Technical",
     dates: "2024–Present",
     detail: "Active in CTF competitions and web security research. Contributed foundational work in cryptography implementations and security architecture documentation.",
     isPrimary: false,
   },
   {
     title: "Dance & Debate",
-    category: "🎭 Competitive",
+    category: "Competitive",
     dates: "2022–2026",
     detail: "Multiple competition awards including regional debate championships. Bilingual proficiency in Korean and English debate formats. Balanced competitive excellence with technical and leadership commitments.",
     isPrimary: false,
@@ -1030,21 +1030,18 @@ export default function Home() {
               subtitle={tSection("about", { subtitle: "Computer Science student at KNU focused on AI systems research and real-world deployment" }).subtitle || "Computer Science student at KNU focused on AI systems research and real-world deployment"}
             />
 
-            {/* Full-width prominent About intro */}
-            <div className="mb-8 border-l-4 border-accent pl-6 py-4 bg-surface/40 rounded-r-lg">
-              <div className="text-lg font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                {lang === "ko" ? "누가 나인가" : "Who I Am"}
-              </div>
-              <div className="space-y-3 text-sm leading-7 text-muted">
-                {(profileToRender.about || profile.about).map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-            </div>
+            {/* 2-column top section: Intro Text + Education */}
+            <div className="grid gap-6 md:grid-cols-2 mb-8">
+              {/* Intro Text (Left) */}
+              <Card>
+                <div className="space-y-3 text-sm leading-7 text-muted">
+                  {(profileToRender.about || profile.about).map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </Card>
 
-            {/* 3-column layout: Education | Soft Skills | Languages */}
-            <div className="grid gap-6 md:grid-cols-3">
-              {/* Education Card */}
+              {/* Education Card (Right) */}
               <Card>
                 <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   {lang === "ko" ? "학력" : "Education"}
@@ -1057,7 +1054,7 @@ export default function Home() {
                     {profileToRender.education?.degree || profile.education.degree}
                   </div>
                   
-                  {/* GPA Progress Bar */}
+                  {/* Simplified GPA - Progress Bar Only */}
                   <div className="mt-4 space-y-2">
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-muted">{profileToRender.education?.gpa || profile.education.gpa}</span>
@@ -1067,32 +1064,25 @@ export default function Home() {
                       <div className="bg-accent h-full rounded-full" style={{ width: "82.5%" }} />
                     </div>
                   </div>
-
-                  {/* Recent GPA Highlighted */}
-                  <div className="mt-4 p-3 rounded-lg bg-accent/10 border border-accent/30">
-                    <div className="text-xs text-accent font-semibold">
-                      {lang === "ko" ? "최근 학기" : "Recent GPA"}
-                    </div>
-                    <div className="text-accent font-semibold text-sm mt-1">
-                      {profileToRender.education?.recentGpa || profile.education.recentGpa}
-                    </div>
-                    <div className="text-xs text-accent/70 mt-2">
-                      {lang === "ko" ? "📈 상승 추세" : "📈 Upward Trend"}
-                    </div>
-                  </div>
-
-                  {/* Focus Areas with Icons */}
-                  <div className="mt-4 text-muted text-xs">
-                    <div className="font-semibold text-foreground mb-2">
-                      {lang === "ko" ? "관심 분야" : "Focus Areas"}
-                    </div>
-                    <div className="space-y-1">
-                      <div>🤖 {lang === "ko" ? "AI 시스템" : "AI Systems"}</div>
-                      <div>💻 {lang === "ko" ? "소프트웨어 공학" : "Software Engineering"}</div>
-                      <div>🔌 {lang === "ko" ? "시스템·네트워크" : "Systems & Networks"}</div>
-                    </div>
-                  </div>
                 </div>
+              </Card>
+            </div>
+
+            {/* 3-column bottom section: Languages | Soft Skills | Focus Areas */}
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Languages Card */}
+              <Card>
+                <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                  {lang === "ko" ? "언어" : "Languages"}
+                </div>
+                <ul className="space-y-3 text-sm">
+                  {(profileToRender.languages || profile.languages).map((l) => (
+                    <li key={l} className="flex items-start text-foreground font-medium">
+                      <span className="mr-2">⭐</span>
+                      {l}
+                    </li>
+                  ))}
+                </ul>
               </Card>
 
               {/* Soft Skills Card with Badges */}
@@ -1100,7 +1090,7 @@ export default function Home() {
                 <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   {lang === "ko" ? "소프트 스킬" : "Soft Skills"}
                 </div>
-                <div className="space-y-2 text-sm">
+                <div className="flex flex-wrap gap-2 text-sm">
                   {(profileToRender.softSkills || profile.softSkills).map((skill, idx) => {
                     const categoryColors = [
                       "bg-accent/20 text-accent border border-accent/40",
@@ -1110,7 +1100,7 @@ export default function Home() {
                       "bg-blue-500/20 text-blue-400 border border-blue-500/40",
                     ];
                     return (
-                      <div key={skill} className={`inline-block px-3 py-1.5 rounded-full text-xs font-medium ${categoryColors[idx % categoryColors.length]}`}>
+                      <div key={skill} className={`px-3 py-1.5 rounded-full text-xs font-medium ${categoryColors[idx % categoryColors.length]}`}>
                         {skill}
                       </div>
                     );
@@ -1118,22 +1108,16 @@ export default function Home() {
                 </div>
               </Card>
 
-              {/* Languages Card */}
+              {/* Focus Areas Card */}
               <Card>
                 <div className="text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                  {lang === "ko" ? "언어" : "Languages"}
+                  {lang === "ko" ? "관심 분야" : "Focus Areas"}
                 </div>
-                <ul className="space-y-3 text-sm">
-                  {(profileToRender.languages || profile.languages).map((l) => {
-                    const isPrimary = l.includes("Fluent") || l.includes("Native") || l.includes("유창") || l.includes("모국어");
-                    return (
-                      <li key={l} className={`flex items-start ${isPrimary ? "text-foreground font-medium" : "text-muted"}`}>
-                        <span className="mr-2">{isPrimary ? "⭐" : "•"}</span>
-                        {l}
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div className="space-y-2 text-muted text-sm">
+                  <div>🤖 {lang === "ko" ? "AI 시스템" : "AI Systems"}</div>
+                  <div>💻 {lang === "ko" ? "소프트웨어 공학" : "Software Engineering"}</div>
+                  <div>🔌 {lang === "ko" ? "시스템·네트워크" : "Systems & Networks"}</div>
+                </div>
               </Card>
             </div>
           </div>
