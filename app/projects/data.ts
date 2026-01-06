@@ -3,6 +3,8 @@ export interface ProjectCardData {
   title: string;
   shortDescription: string;
   techStack: string;
+  category: "AI" | "Full-Stack" | "Backend" | "Frontend";
+  outcomes: string[];
 }
 
 export interface ProjectDetailData extends ProjectCardData {
@@ -22,42 +24,56 @@ export const projectCards: ProjectCardData[] = [
     title: "AI-Based Disaster Scenario Generation System",
     shortDescription: "RAG + Large Language Models",
     techStack: "LLMs, RAG, LangChain, FAISS, Docker",
+    category: "AI",
+    outcomes: ["Research-grade", "Multi-source RAG"],
   },
   {
     id: "posture-detection",
     title: "AI-Based Posture Detection and Feedback System",
     shortDescription: "Real-time computer vision for exercise analysis",
     techStack: "Python, Computer Vision, MediaPipe, OpenCV",
+    category: "AI",
+    outcomes: ["Real-time", "Low-latency"],
   },
   {
     id: "shebots",
     title: "SheBots — AI-Powered Academic Support Chatbot",
     shortDescription: "Bilingual conversational AI for academic support",
     techStack: "FastAPI, RAG, LangChain, GPT-4, Docker",
+    category: "AI",
+    outcomes: ["Production", "Bilingual"],
   },
   {
     id: "inflowchat",
     title: "InflowChat — Enterprise AI Chatbot",
     shortDescription: "Production-ready enterprise chatbot platform",
     techStack: "React, TypeScript, Gemini API, FAISS",
+    category: "Frontend",
+    outcomes: ["Production", "Enterprise"],
   },
   {
     id: "cafe-kiosk",
     title: "AI-Based Voice Recognition Café Kiosk",
     shortDescription: "Fine-tuned LLaMA for conversational ordering",
     techStack: "LLaMA3, FastAPI, NLP, Fine-Tuning",
+    category: "AI",
+    outcomes: ["+10% accuracy", "Fine-tuned"],
   },
   {
     id: "transportation-kiosk",
     title: "길:벗 (VISIONED) — Accessible Transportation Kiosk",
     shortDescription: "Voice-driven public transportation kiosk for accessibility",
     techStack: "Node.js, Express, Google Cloud APIs, React",
+    category: "Full-Stack",
+    outcomes: ["Accessibility", "Voice-driven"],
   },
   {
     id: "kert-website",
     title: "KERT Cybersecurity Club Website",
     shortDescription: "Official website for university cybersecurity club",
     techStack: "Java, Spring Boot, React, Docker",
+    category: "Backend",
+    outcomes: ["Deployed", "Secure API"],
   },
 ];
 
@@ -67,6 +83,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "AI-Based Disaster Scenario Generation System",
     shortDescription: "RAG + Large Language Models",
     techStack: "LLMs, RAG, LangChain, FAISS, Docker",
+    category: "AI",
+    outcomes: ["Research-grade", "Multi-source RAG"],
     dates: "Oct 2025 – Dec 2025",
     organization: "Intelligent Software Systems Lab",
     whatBuilt: [
@@ -104,6 +122,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "AI-Based Posture Detection and Feedback System",
     shortDescription: "Real-time computer vision for exercise analysis",
     techStack: "Python, Computer Vision, MediaPipe, OpenCV",
+    category: "AI",
+    outcomes: ["Real-time", "Low-latency"],
     dates: "Sep 2025 – Dec 2025",
     organization: "Kyungpook National University",
     whatBuilt: [
@@ -138,6 +158,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "SheBots — AI-Powered Academic Support Chatbot",
     shortDescription: "Bilingual conversational AI for academic support",
     techStack: "FastAPI, RAG, LangChain, GPT-4, Docker",
+    category: "AI",
+    outcomes: ["Production", "Bilingual"],
     dates: "Sep 2025 – Dec 2025",
     organization: "Kyungpook National University",
     whatBuilt: [
@@ -172,6 +194,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "InflowChat — Enterprise AI Chatbot",
     shortDescription: "Production-ready enterprise chatbot platform",
     techStack: "React, TypeScript, Gemini API, FAISS",
+    category: "Frontend",
+    outcomes: ["Production", "Enterprise"],
     dates: "Dec 2024 – Jan 2025",
     organization: "RikkeiSoft Corporation (Internship)",
     whatBuilt: [
@@ -207,6 +231,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "AI-Based Voice Recognition Café Kiosk",
     shortDescription: "Fine-tuned LLaMA for conversational ordering",
     techStack: "LLaMA3, FastAPI, NLP, Fine-Tuning",
+    category: "AI",
+    outcomes: ["+10% accuracy", "Fine-tuned"],
     dates: "Sep 2024 – Dec 2024",
     organization: "Capstone Project (Industry-Collaborated)",
     whatBuilt: [
@@ -241,6 +267,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "길:벗 (VISIONED) — Accessible Transportation Kiosk",
     shortDescription: "Voice-driven public transportation kiosk for accessibility",
     techStack: "Node.js, Express, Google Cloud APIs, React",
+    category: "Full-Stack",
+    outcomes: ["Accessibility", "Voice-driven"],
     dates: "Oct 2024 – Nov 2024",
     organization: "Kyungpook National University",
     whatBuilt: [
@@ -273,6 +301,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     title: "KERT Cybersecurity Club Website",
     shortDescription: "Official website for university cybersecurity club",
     techStack: "Java, Spring Boot, React, Docker",
+    category: "Backend",
+    outcomes: ["Deployed", "Secure API"],
     dates: "May 2024 – Oct 2024",
     organization: "Kyungpook National University",
     whatBuilt: [

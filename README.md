@@ -115,7 +115,7 @@ export NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 
 ## 📂 Project Structure
 
-```
+```text
 Portfolio/
 ├── .github/
 │   └── workflows/
@@ -193,7 +193,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 👤 Author
 
-**Nishtha Lath**
+### Nishtha Lath
 
 - GitHub: [@NishthaLath](https://github.com/NishthaLath)
 - LinkedIn: [nishtha-lath-335206276](https://www.linkedin.com/in/nishtha-lath-335206276/)

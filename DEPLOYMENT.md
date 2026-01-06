@@ -19,7 +19,7 @@ That's it! Your site will automatically deploy when you push to the `main` branc
 
 After the first deployment completes, your portfolio will be live at:
 
-```
+```url
 https://<your-username>.github.io/Portfolio/
 ```
 

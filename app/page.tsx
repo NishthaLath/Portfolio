@@ -122,6 +122,7 @@ const koProfile = {
 const skills = [
   {
     title: "AI / LLMs",
+    proficiency: "Expert",
     items: [
       "LLaMA, GPT models",
       "Retrieval-Augmented Generation (RAG)",
@@ -133,6 +134,7 @@ const skills = [
   },
   {
     title: "Backend & APIs",
+    proficiency: "Advanced",
     items: [
       "FastAPI",
       "RESTful API design",
@@ -144,6 +146,7 @@ const skills = [
   },
   {
     title: "Frontend",
+    proficiency: "Advanced",
     items: [
       "React (TypeScript)",
       "HTML, CSS, Tailwind",
@@ -153,6 +156,7 @@ const skills = [
   },
   {
     title: "Infrastructure",
+    proficiency: "Intermediate",
     items: [
       "Docker",
       "NGINX",
@@ -163,6 +167,7 @@ const skills = [
   },
   {
     title: "Computer Vision",
+    proficiency: "Advanced",
     items: [
       "YOLO",
       "MediaPipe",
@@ -174,6 +179,7 @@ const skills = [
   },
   {
     title: "Languages",
+    proficiency: "Expert",
     items: [
       "Python",
       "Java",
@@ -441,6 +447,7 @@ const koLeadership = [
 const koSkills = [
   {
     title: "AI / LLM",
+    proficiency: "전문가",
     items: [
       "LLaMA, GPT 모델",
       "RAG (검색 증강 생성)",
@@ -452,6 +459,7 @@ const koSkills = [
   },
   {
     title: "백엔드 & API",
+    proficiency: "고급",
     items: [
       "FastAPI",
       "RESTful API 설계",
@@ -463,6 +471,7 @@ const koSkills = [
   },
   {
     title: "프론트엔드",
+    proficiency: "고급",
     items: [
       "React (TypeScript)",
       "HTML, CSS, Tailwind",
@@ -472,6 +481,7 @@ const koSkills = [
   },
   {
     title: "인프라",
+    proficiency: "중급",
     items: [
       "Docker",
       "NGINX",
@@ -482,6 +492,7 @@ const koSkills = [
   },
   {
     title: "컴퓨터 비전",
+    proficiency: "고급",
     items: [
       "YOLO",
       "MediaPipe",
@@ -493,6 +504,7 @@ const koSkills = [
   },
   {
     title: "프로그래밍 언어",
+    proficiency: "전문가",
     items: ["Python", "Java", "JavaScript", "C", "C++"],
   },
 ];
@@ -782,6 +794,19 @@ export default function Home() {
                   <span className="text-muted">({profileToRender.nameNative})</span>
                 </h1>
 
+                {/* Specialization Badges */}
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-accent/20 to-accent-2/20 text-accent border border-accent/40 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    🤖 AI Systems
+                  </span>
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-accent-2/20 to-accent/20 text-accent-2 border border-accent-2/40 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    🔗 RAG Pipelines
+                  </span>
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-500/20 to-accent/20 text-purple-400 border border-purple-500/40 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    💻 Full-Stack
+                  </span>
+                </div>
+
                 <p className="mt-5 text-lg leading-8 text-muted">
                   {profileToRender.subheadline}
                 </p>
@@ -900,11 +925,23 @@ export default function Home() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {skillsToRender.map((group) => (
                 <Card key={group.title}>
-                  <div
-                    className="text-base font-semibold tracking-tight text-foreground"
-                    style={{ fontFamily: "var(--font-geist-mono)" }}
-                  >
-                    {group.title}
+                  <div className="flex items-center justify-between mb-2">
+                    <div
+                      className="text-base font-semibold tracking-tight text-foreground"
+                      style={{ fontFamily: "var(--font-geist-mono)" }}
+                    >
+                      {group.title}
+                    </div>
+                    {group.proficiency && (
+                      <span className={cx(
+                        "text-xs font-semibold px-2 py-1 rounded-full",
+                        group.proficiency === "Expert" || group.proficiency === "전문가" ? "bg-accent/20 text-accent border border-accent/40" :
+                        group.proficiency === "Advanced" || group.proficiency === "고급" ? "bg-accent-2/20 text-accent-2 border border-accent-2/40" :
+                        "bg-muted/20 text-muted border border-muted/40"
+                      )}>
+                        {group.proficiency}
+                      </span>
+                    )}
                   </div>
                   <ul className="mt-4 space-y-2 text-sm text-muted">
                     {group.items.map((item) => (
@@ -982,6 +1019,19 @@ export default function Home() {
               {projectCards.map((project) => (
                 <Card key={project.id}>
                   <div className="h-full flex flex-col">
+                    {/* Category Badge */}
+                    <div className="mb-3">
+                      <span className={cx(
+                        "inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold",
+                        project.category === "AI" ? "bg-accent/15 text-accent border border-accent/30" :
+                        project.category === "Backend" ? "bg-accent-2/15 text-accent-2 border border-accent-2/30" :
+                        project.category === "Frontend" ? "bg-purple-500/15 text-purple-400 border border-purple-500/30" :
+                        "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                      )}>
+                        {project.category}
+                      </span>
+                    </div>
+
                     {/* Card Title */}
                     <div className="mb-3 flex-1">
                       <h3 className="text-lg font-semibold tracking-tight text-foreground" style={{ fontFamily: "var(--font-geist-mono)" }}>
@@ -989,6 +1039,17 @@ export default function Home() {
                       </h3>
                       <p className="mt-2 text-sm text-muted">{project.shortDescription}</p>
                     </div>
+
+                    {/* Outcomes */}
+                    {project.outcomes && project.outcomes.length > 0 && (
+                      <div className="mb-3 flex flex-wrap gap-2">
+                        {project.outcomes.map((outcome) => (
+                          <span key={outcome} className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-surface-2/80 text-muted-2 border border-border/50">
+                            {outcome}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Tech Stack */}
                     <div className="mb-4">
@@ -999,7 +1060,7 @@ export default function Home() {
                     {/* Learn More Button */}
                     <Link
                       href={`/projects/${project.id}`}
-                      className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-muted transition-colors mt-auto"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-accent transition-colors mt-auto"
                     >
                       Learn more →
                     </Link>
