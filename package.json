@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "start:watch": "nodemon --watch . --ext js,ts,tsx,css,md --ignore .next --exec \"npm run build && next start\"",
-    "build": "next build",
+    "build": "NEXT_PUBLIC_BASEPATH=/Portfolio next build",
+    "build:local": "next build",
     "start": "next start",
     "lint": "eslint"
   },
