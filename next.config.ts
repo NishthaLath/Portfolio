@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   // Use an explicit env var when building for GitHub Pages (e.g. '/Portfolio').
   // Locally the basePath will be empty which makes `npm run dev` serve at '/'.
   basePath: repoBasePath,
+  assetPrefix: repoBasePath,
   images: {
     unoptimized: true,
   },
