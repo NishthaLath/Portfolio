@@ -61,11 +61,12 @@ export function HeroSection({ profileData, lang }: HeroSectionProps) {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-2/20 blur-2xl opacity-60" />
               <div className="relative rounded-2xl border border-border/80 overflow-hidden shadow-2xl shadow-accent/20 backdrop-blur-sm">
                 <div className="relative aspect-[4/5]">
-                  <img
+                  <Image
                     src="/Profile_image.png"
                     alt="Profile image of Nishtha Lath"
-                    className="w-full h-full object-cover"
-                  />
+                    fill
+                    className="object-cover"
+                    />
                 </div>
               </div>
             </div>

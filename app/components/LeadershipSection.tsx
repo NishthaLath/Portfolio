@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import type { LeadershipItem, SectionContent } from "../types";
 import { SectionHeader } from "./SectionHeader";
