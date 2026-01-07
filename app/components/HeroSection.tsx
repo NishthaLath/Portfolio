@@ -8,6 +8,9 @@ type HeroSectionProps = {
   lang: "en" | "ko";
 };
 
+const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
+
+
 export function HeroSection({ profileData, lang }: HeroSectionProps) {
   return (
     <section id="top" className="relative overflow-hidden min-h-screen flex flex-col">
@@ -62,10 +65,11 @@ export function HeroSection({ profileData, lang }: HeroSectionProps) {
               <div className="relative rounded-2xl border border-border/80 overflow-hidden shadow-2xl shadow-accent/20 backdrop-blur-sm">
                 <div className="relative aspect-[4/5]">
                   <Image
-                    src="/Profile_image.png"
+                    src={`${basePath}/Profile_image.png`}
                     alt="Profile image of Nishtha Lath"
                     fill
                     className="object-cover"
+                    priority
                     />
                 </div>
               </div>
