@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import type { ProjectCardData, SectionContent } from "../types";
+import type { SectionContent } from "../types";
+import { ProjectCardData } from "../projects/data";
 import { SectionHeader } from "./SectionHeader";
 import { Card } from "./Card";
 
@@ -73,7 +74,7 @@ export function ProjectsSection({ projects, sectionContent }: ProjectsSectionPro
                 </div>
 
                 <Link
-                  href={`/projectdetail?id=${project.id}`}
+                  href={`/projects/${project.id}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-accent transition-colors mt-auto"
                 >
                   Learn more →

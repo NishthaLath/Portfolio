@@ -23,26 +23,6 @@ export type ProjectItem = {
   repoLinks?: { label: string; href: string }[];
 };
 
-export type ProjectCardData = {
-  id: string;
-  title: string;
-  shortDescription: string;
-  techStack: string;
-  category: "AI" | "Full-Stack" | "Backend" | "Frontend";
-  outcomes: string[];
-};
-
-export type ProjectDetailData = ProjectCardData & {
-  dates: string;
-  organization: string;
-  whatBuilt: string[];
-  role: string;
-  technicalContributions: string[];
-  techStackFull: string[];
-  outcome: string[];
-  repository?: string;
-};
-
 export type ResearchItem = {
   title: string;
   venue: string;
