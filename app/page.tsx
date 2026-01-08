@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import React, { useEffect, useState } from "react";
-import { projectCards } from "./projects/data";
+import { projectCards, projectCardsKo } from "./data/constants";
 import {
   profile,
   koProfile,
@@ -74,6 +74,7 @@ export default function Home() {
   const leadershipToRender = lang === "ko" ? koLeadership : leadership;
   const skillsToRender = lang === "ko" ? koSkills : skills;
   const researchInterestsToRender = lang === "ko" ? koResearchInterests : researchInterests;
+  const projectsToRender = lang === "ko" ? projectCardsKo : projectCards;
 
   const tSection = (key: string, fallback: SectionContent): SectionContent => {
     if (lang === "ko" && sectionsKo[key]) return sectionsKo[key];
@@ -129,7 +130,7 @@ export default function Home() {
         />
 
         <ProjectsSection
-          projects={projectCards}
+          projects={projectsToRender}
           sectionContent={tSection("projects", {
             eyebrow: "Projects",
             title: "Team Work",
