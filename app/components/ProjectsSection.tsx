@@ -12,9 +12,10 @@ function cx(...classes: Array<string | false | null | undefined>) {
 type ProjectsSectionProps = {
   projects: ProjectCardData[];
   sectionContent: SectionContent;
+  lang: "en" | "ko";
 };
 
-export function ProjectsSection({ projects, sectionContent }: ProjectsSectionProps) {
+export function ProjectsSection({ projects, sectionContent, lang }: ProjectsSectionProps) {
   return (
     <section id="projects" className="border-t border-border/60 min-h-screen flex flex-col">
       <div className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-14 w-full">
@@ -74,10 +75,10 @@ export function ProjectsSection({ projects, sectionContent }: ProjectsSectionPro
                 </div>
 
                 <Link
-                  href={`/projects/${project.id}`}
+                  href={`/projects/${project.id}${lang === "ko" ? "?lang=ko" : ""}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-accent transition-colors mt-auto"
                 >
-                  Learn more →
+                  {lang === "ko" ? "자세히 보기 →" : "Learn more →"}
                 </Link>
               </div>
             </Card>

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { projectCards, projectDetails } from "../data";
+import { projectCards, projectDetails, koProjectCards, koProjectDetails } from "../data";
 
 // Ensure static export builds all project detail pages
 export const dynamicParams = false;
@@ -85,11 +85,19 @@ interface ProjectDetailPageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{
+    lang?: string;
+  }>;
 }
 
-export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+export default async function ProjectDetailPage({ params, searchParams }: ProjectDetailPageProps) {
   const { id } = await params;
-  const project = projectDetails[id];
+  const { lang: langParam } = await searchParams;
+  const lang = langParam === "ko" ? "ko" : "en";
+  
+  const projectData = lang === "ko" ? koProjectDetails : projectDetails;
+  const allProjects = lang === "ko" ? koProjectCards : projectCards;
+  const project = projectData[id];
 
   if (!project) {
     return notFound();
@@ -100,11 +108,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-20">
         {/* Back Button */}
         <Link 
-          href="/#projects" 
+          href={`/#projects${lang === "ko" ? "?lang=ko" : ""}`}
           className="mb-8 inline-flex items-center gap-2 text-muted hover:text-accent transition-all hover:gap-3 group"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span> 
-          <span className="font-medium">Back to Projects</span>
+          <span className="font-medium">{lang === "ko" ? "프로젝트로 돌아가기" : "Back to Projects"}</span>
         </Link>
 
         {/* Header with gradient background */}
@@ -127,21 +135,21 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <div className="flex items-center gap-2">
                 <span className="text-accent">📅</span>
                 <div>
-                  <div className="text-muted-2 text-xs">Duration</div>
+                  <div className="text-muted-2 text-xs">{lang === "ko" ? "기간" : "Duration"}</div>
                   <div className="font-medium text-foreground">{project.dates}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-accent">🏢</span>
                 <div>
-                  <div className="text-muted-2 text-xs">Organization</div>
+                  <div className="text-muted-2 text-xs">{lang === "ko" ? "소속" : "Organization"}</div>
                   <div className="font-medium text-foreground">{project.organization}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-accent">👤</span>
                 <div>
-                  <div className="text-muted-2 text-xs">Role</div>
+                  <div className="text-muted-2 text-xs">{lang === "ko" ? "역할" : "Role"}</div>
                   <div className="font-medium text-foreground">{project.role}</div>
                 </div>
               </div>
@@ -156,7 +164,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
             {/* Problem Statement (if available) */}
-            <ExpandableSection title="💡 Problem & Approach" defaultExpanded={true}>
+            <ExpandableSection title={lang === "ko" ? "💡 문제 정의 및 접근" : "💡 Problem & Approach"} defaultExpanded={true}>
               <ul className="space-y-3 text-sm sm:text-base text-muted leading-7">
                 {project.whatBuilt.map((bullet, index) => (
                   <li key={index} className="flex gap-3 group">
@@ -168,7 +176,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </ExpandableSection>
 
             {/* Technical Contributions */}
-            <ExpandableSection title="🔧 Technical Deep Dive" defaultExpanded={true}>
+            <ExpandableSection title={lang === "ko" ? "🔧 기술적 세부사항" : "🔧 Technical Deep Dive"} defaultExpanded={true}>
               <ul className="space-y-3 text-sm sm:text-base text-muted leading-7">
                 {project.technicalContributions.map((contribution, index) => (
                   <li key={index} className="flex gap-3 group">
@@ -180,7 +188,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </ExpandableSection>
 
             {/* Outcome & Impact */}
-            <ExpandableSection title="🎯 Results & Impact" defaultExpanded={true}>
+            <ExpandableSection title={lang === "ko" ? "🎯 성과 및 영향" : "🎯 Results & Impact"} defaultExpanded={true}>
               <ul className="space-y-3 text-sm sm:text-base text-muted leading-7">
                 {project.outcome.map((item, index) => (
                   <li key={index} className="flex gap-3 p-3 rounded-lg bg-surface/40 border border-border/40 hover:border-accent/40 transition-all group">
@@ -198,7 +206,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <Card interactive>
               <div className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 <span>💻</span>
-                <span>Tech Stack</span>
+                <span>{lang === "ko" ? "기술 스택" : "Tech Stack"}</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {project.techStackFull.map((tech) => (
@@ -212,9 +220,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <Card interactive>
                 <div className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   <span>📂</span>
-                  <span>Repository</span>
+                  <span>{lang === "ko" ? "저장소" : "Repository"}</span>
                 </div>
-                <LinkButton label="View on GitHub →" href={project.repository} variant="primary" />
+                <LinkButton label={lang === "ko" ? "GitHub에서 보기 →" : "View on GitHub →"} href={project.repository} variant="primary" />
               </Card>
             )}
 
@@ -222,13 +230,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <Card interactive>
               <div className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 <span>🔗</span>
-                <span>Related Projects</span>
+                <span>{lang === "ko" ? "관련 프로젝트" : "Related Projects"}</span>
               </div>
               <div className="space-y-1">
-                {projectCards.filter(card => card.id !== project.id).slice(0, 4).map((card) => (
+                {allProjects.filter(card => card.id !== project.id).slice(0, 4).map((card) => (
                   <Link
                     key={card.id}
-                    href={`/projects/${card.id}`}
+                    href={`/projects/${card.id}${lang === "ko" ? "?lang=ko" : ""}`}
                     className="block text-sm p-3 rounded-lg transition-all hover:bg-surface-2/80 hover:border-l-2 hover:border-accent hover:pl-4 text-muted hover:text-foreground group"
                   >
                     <div className="font-medium">{card.title}</div>
@@ -238,10 +246,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </div>
               
               <Link
-                href="/#projects"
+                href={`/#projects${lang === "ko" ? "?lang=ko" : ""}`}
                 className="block mt-4 pt-4 border-t border-border/60 text-sm text-center text-accent hover:text-accent-2 transition-colors font-medium"
               >
-                View all projects →
+                {lang === "ko" ? "모든 프로젝트 보기 →" : "View all projects →"}
               </Link>
             </Card>
           </div>
