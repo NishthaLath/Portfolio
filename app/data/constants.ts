@@ -544,7 +544,7 @@ export const koLeadership: LeadershipItem[] = [
     dates: "2024–2026",
     detail:
       "50명 이상의 국제 학생을 위해 10회 이상의 학과 행사를 조직 및 운영. 소통 체계를 개선하여 국제 학생의 만족도를 향상시켰습니다.",
-    isPrimary: true,
+    isPrimary: false,
   },
   {
     title: "ISO 회원",
