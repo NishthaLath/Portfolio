@@ -7,7 +7,7 @@ export type LinkItem = {
 export type ExperienceItem = {
   title: string;
   org: string;
-  dates: string;
+  dates?: string;
   bullets: string[];
   stack: string[];
   note?: string;

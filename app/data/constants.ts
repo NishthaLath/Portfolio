@@ -208,6 +208,29 @@ export const koSkills: SkillGroup[] = [
 
 export const experience: ExperienceItem[] = [
   {
+    title: "AI Engineer Intern",
+    org: "BeamWorks",
+    bullets: [
+      "Contributed to Dr.KIWI, an AI-powered healthcare chatbot that provides cancer-related medical information.",
+      "Built a hybrid RAG retrieval system and LLM evaluation system using FAISS and Neo4j.",
+      "Optimized LangChain and FastAPI backend logic and retrieval pipelines for AI service workflows.",
+      "Conducted prompt engineering, response quality analysis, and performance evaluation using RAGAS, SUPERT, and SummaC.",
+      "Documented system architecture and improved user-friendly medical AI response quality.",
+    ],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "FAISS",
+      "Neo4j",
+      "Docker",
+      "Ollama",
+      "GPT-4.1",
+      "Gemini",
+      "RAGAS",
+    ],
+  },
+  {
     title: "Frontend Developer Intern (Team Leader)",
     org: "RikkeiSoft Corporation",
     dates: "Dec 2024 – Jan 2025",
@@ -233,6 +256,29 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const koExperience: ExperienceItem[] = [
+  {
+    title: "AI 엔지니어 인턴",
+    org: "BeamWorks",
+    bullets: [
+      "암 관련 의료 정보를 제공하는 AI 기반 헬스케어 챗봇 Dr.KIWI 개발에 참여했습니다.",
+      "FAISS와 Neo4j를 활용한 하이브리드 RAG 검색 시스템 및 LLM 평가 시스템 구축을 수행했습니다.",
+      "LangChain, FastAPI 기반 AI 서비스 백엔드 로직과 검색 파이프라인을 최적화했습니다.",
+      "프롬프트 엔지니어링, 응답 품질 분석, RAGAS·SUPERT·SummaC 기반 성능 평가 업무를 수행했습니다.",
+      "시스템 아키텍처를 문서화하고 사용자 친화적인 의료 AI 응답 품질 개선에 참여했습니다.",
+    ],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "FAISS",
+      "Neo4j",
+      "Docker",
+      "Ollama",
+      "GPT-4.1",
+      "Gemini",
+      "RAGAS",
+    ],
+  },
   {
     title: "프론트엔드 개발 인턴 (팀 리더)",
     org: "RikkeiSoft Corporation",

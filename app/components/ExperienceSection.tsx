@@ -38,7 +38,7 @@ export function ExperienceSection({ experiences, sectionContent }: ExperienceSec
                     </div>
                     <div className="mt-1 text-sm text-muted">{item.org}</div>
                   </div>
-                  <div className="text-sm font-medium text-accent-2">{item.dates}</div>
+                  {item.dates ? <div className="text-sm font-medium text-accent-2">{item.dates}</div> : null}
                 </div>
 
                 {item.note ? <div className="mt-3 text-sm text-muted">⚠ {item.note}</div> : null}
